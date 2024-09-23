@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="188icon.png" type="image/x-icon">
+    <title>JavaScript Showcase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .example {
+            display: flex;
+            margin-bottom: 40px;
+            background: #eee;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .demo {
+            flex: 1;
+            padding-right: 20px;
+            text-align: center;
+            justify-content: center;
+        }
+        .demo>#clock{
+            margin-top: 100px;
+        }
+        .demo>h2 {
+            text-align: left;
+        }
+        .demo>#container {
+            justify-content: center;
+            margin: auto auto;
+            margin-top: 100px;
+        }
+        .explanation {
+            flex: 1;
+            padding-left: 20px;
+            border-left: 1px solid #ccc;
+			overflow: auto;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        #clock {
+            font-size: 20px;
+            font-family: Orbitron;
+            text-align: center;
+            letter-spacing: 3px;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JavaScript Showcase</h1>
+        
+        <div class="example">
+            <div class="demo">
+                <h2>1. Thay đổi nội dung</h2>
+                <p id="demo">Nhấn nút để thay đổi nội dung này.</p>
+                <button onclick="changeText()">Thay đổi nội dung</button>
+            </div>
+            <div class="explanation">
+                <h3>Giải thích</h3>
+                <p>Trong ví dụ này, chúng ta sử dụng JavaScript để thay đổi nội dung của một phần tử HTML khi người dùng nhấn nút.</p>
+                <pre><code>
+function changeText() {
+    document.getElementById("demo").innerHTML = "Nội dung đã được thay đổi!";
+}
+                </code></pre>
+                <p>Hàm <code>changeText()</code> sử dụng <code>document.getElementById()</code> để tìm phần tử có id là "demo", sau đó thay đổi nội dung HTML của nó bằng cách gán giá trị mới cho thuộc tính <code>innerHTML</code>.</p>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="demo">
+                <h2>2. Tính toán đơn giản</h2>
+                <p>Nhập hai số để cộng:</p>
+                <input type="number" id="num1" placeholder="Số thứ nhất">
+                <input type="number" id="num2" placeholder="Số thứ hai">
+                <button onclick="addNumbers()">Cộng</button>
+                <p id="result"></p>
+            </div>
+            <div class="explanation">
+                <h3>Giải thích</h3>
+                <p>Ví dụ này minh họa cách JavaScript có thể thực hiện các phép tính và tương tác với đầu vào của người dùng.</p>
+                <pre><code>
+function addNumbers() {
+    var num1 = parseFloat(document.getElementById("num1").value);
+    var num2 = parseFloat(document.getElementById("num2").value);
+    var sum = num1 + num2;
+    document.getElementById("result").innerHTML = "Kết quả: " + sum;
+}
+                </code></pre>
+                <p>Hàm <code>addNumbers()</code> lấy giá trị từ hai trường input, chuyển đổi chúng thành số thực với <code>parseFloat()</code>, thực hiện phép cộng, và hiển thị kết quả.</p>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="demo">
+                <h2>3. Đồng hồ thời gian thực</h2>
+                <p id="clock"></p>
+            </div>
+            <div class="explanation">
+                <h3>Giải thích</h3>
+                <p>Đây là một ví dụ về cách JavaScript có thể cập nhật nội dung trang web một cách liên tục, tạo ra một đồng hồ thời gian thực.</p>
+                <pre><code>
+function updateClock() {
+    var date = new Date();
+    var h = date.getHours(); // 0 - 23
+    var m = date.getMinutes(); // 0 - 59
+    var s = date.getSeconds(); // 0 - 59
+    var session = "AM";
+    
+    if(h == 0){
+        h = 12;
+    }
+    
+    if(h > 12){
+        h = h - 12;
+        session = "PM";
+    }
+    
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+    
+    var time = h + ":" + m + ":" + s + " " + session;
+    document.getElementById("clock").innerText = time;
+    document.getElementById("clock").textContent = time;
+    
+    setTimeout(updateClock, 1000);
+}
+
+updateClock();
+                </code></pre>
+                <p>Hàm <code>updateClock()</code> lấy thời gian hiện tại, định dạng nó, và cập nhật nội dung của phần tử "clock". Hàm <code>setTimeout()</code> được sử dụng để gọi lại <code>updateClock()</code> sau mỗi 1000 mili giây (1 giây), tạo ra hiệu ứng cập nhật liên tục.</p>
+            </div>
+        </div>
+		
+		<div class="example">
+			<div class="demo">
+				<h2>4. Các hình tròn tránh con trỏ</h2>
+				<p>Di chuyển chuột vào vùng dưới đây để xem hiệu ứng các hình tròn di chuyển để tránh con trỏ.</p>
+				<div id="container" style="width: 500px; height: 500px; background-color: #ddd; position: relative; border-radius: 25px;">
+					<div class="square" id="square1" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 50%;"></div>
+					<div class="square" id="square2" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 50%;"></div>
+					<div class="square" id="square3" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 50%;"></div>
+					<div id="cursor" style="width: 20px; height: 20px; border-radius: 50%; background-color: rgba(231, 76, 60, 0.7); position: absolute; pointer-events: none;"></div>
+				</div>
+			</div>
+			<div class="explanation">
+				<h3>Giải thích</h3>
+				<p>Ví dụ này hiển thị các hình tròn di chuyển để tránh con trỏ khi nó đến gần. Chúng ta sử dụng JavaScript để tính toán khoảng cách giữa con trỏ và các hình tròn, sau đó di chuyển các hình tròn đến vị trí khác nếu chúng quá gần.</p>
+				
+				<h4>1. Tính toán khoảng cách giữa con trỏ và các hình tròn</h4>
+				<p>Chúng ta sử dụng hàm <code>moveSquaresAwayFromCursor()</code> để tính khoảng cách giữa con trỏ và từng hình tròn. Nếu con trỏ tiến gần một hình tròn, hàm sẽ tìm vị trí trống và di chuyển hình tròn đó đến vị trí mới.</p>
+				
+				<pre><code>
+function moveSquaresAwayFromCursor(cursorX, cursorY) {
+	const availableCorners = [0, 1, 2, 3].filter(corner => !squarePositions.includes(corner));
+
+	if (availableCorners.length === 0) return;
+
+	const emptyCornerIndex = availableCorners[0];
+
+	const approachingSquareIndex = squarePositions.findIndex((_, idx) => {
+		const squarePosition = squarePositions[idx];
+		const { x, y } = cornerPositions[squarePosition];
+		const dx = cursorX - (x + squareSize / 2);
+		const dy = cursorY - (y + squareSize / 2);
+		const distance = Math.sqrt(dx * dx + dy * dy);
+		return distance < 120; // Nếu khoảng cách nhỏ hơn 120px
+	});
+
+	if (approachingSquareIndex !== -1) {
+		let remainingIndices = squarePositions.filter((pos, idx) => idx !== approachingSquareIndex);
+		let swapIndex = remainingIndices[0];
+
+		squarePositions[squarePositions.indexOf(swapIndex)] = emptyCornerIndex;
+		squarePositions[approachingSquareIndex] = swapIndex;
+
+		updateSquarePositions();
+	}
+}
+				</code></pre>
+
+				<h4>2. Cập nhật vị trí của các hình tròn</h4>
+				<p>Sau khi tìm được vị trí mới, chúng ta sử dụng hàm <code>updateSquarePositions()</code> để thay đổi vị trí của các hình tròn.</p>
+				
+				<pre><code>
+function updateSquarePositions() {
+	squares.forEach((square, index) => {
+		const position = cornerPositions[squarePositions[index]];
+		square.style.left = `${position.x}px`;
+		square.style.top = `${position.y}px`;
+	});
+}
+				</code></pre>
+
+				<h4>3. Di chuyển con trỏ</h4>
+				<p>Khi con trỏ di chuyển trong vùng chứa, chúng ta sử dụng <code>mousemove</code> để thay đổi vị trí của con trỏ tùy chỉnh, đồng thời gọi hàm <code>moveSquaresAwayFromCursor()</code> để di chuyển các hình tròn.</p>
+				
+				<pre><code>
+container.addEventListener('mousemove', (e) => {
+	const rect = container.getBoundingClientRect();
+	const x = e.clientX - rect.left;
+	const y = e.clientY - rect.top;
+
+	cursor.style.left = `${x - 10}px`;
+	cursor.style.top = `${y - 10}px`;
+
+	moveSquaresAwayFromCursor(x, y);
+});
+				</code></pre>
+			</div>
+
+		</div>
+    </div>
+
+    <script>
+        function changeText() {
+            document.getElementById("demo").innerHTML = "Nội dung đã được thay đổi!";
+        }
+
+        function addNumbers() {
+            var num1 = parseFloat(document.getElementById("num1").value);
+            var num2 = parseFloat(document.getElementById("num2").value);
+            var sum = num1 + num2;
+            document.getElementById("result").innerHTML = "Kết quả: " + sum;
+        }
+
+        function updateClock() {
+            var date = new Date();
+            var h = date.getHours(); // 0 - 23
+            var m = date.getMinutes(); // 0 - 59
+            var s = date.getSeconds(); // 0 - 59
+            var session = "AM";
+            
+            if(h == 0){
+                h = 12;
+            }
+            
+            if(h > 12){
+                h = h - 12;
+                session = "PM";
+            }
+            
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+            
+            var time = h + ":" + m + ":" + s + " " + session;
+            document.getElementById("clock").innerText = time;
+            document.getElementById("clock").textContent = time;
+            
+            setTimeout(updateClock, 1000);
+        }
+
+        updateClock();
+    </script>
+	
+	<script>
+		const container = document.getElementById('container');
+		const squares = document.querySelectorAll('.square');
+		const cursor = document.getElementById('cursor');
+
+		const margin = 25;
+		const containerSize = 500;
+		const squareSize = 150;
+
+		const cornerPositions = [
+			{ x: margin, y: margin },
+			{ x: containerSize - squareSize - margin, y: margin },
+			{ x: margin, y: containerSize - squareSize - margin },
+			{ x: containerSize - squareSize - margin, y: containerSize - squareSize - margin }
+		];
+
+		let squarePositions = [0, 1, 2];
+
+		function updateSquarePositions() {
+			squares.forEach((square, index) => {
+				const position = cornerPositions[squarePositions[index]];
+				square.style.left = `${position.x}px`;
+				square.style.top = `${position.y}px`;
+			});
+		}
+
+		function moveSquaresAwayFromCursor(cursorX, cursorY) {
+			const availableCorners = [0, 1, 2, 3].filter(corner => !squarePositions.includes(corner));
+
+			if (availableCorners.length === 0) return;
+
+			const emptyCornerIndex = availableCorners[0];
+
+			const approachingSquareIndex = squarePositions.findIndex((_, idx) => {
+				const squarePosition = squarePositions[idx];
+				const { x, y } = cornerPositions[squarePosition];
+				const dx = cursorX - (x + squareSize / 2);
+				const dy = cursorY - (y + squareSize / 2);
+				const distance = Math.sqrt(dx * dx + dy * dy);
+				return distance < 120;
+			});
+
+			if (approachingSquareIndex !== -1) {
+				let remainingIndices = squarePositions.filter((pos, idx) => idx !== approachingSquareIndex);
+				let swapIndex;
+
+				swapIndex = remainingIndices[0];
+
+				squarePositions[squarePositions.indexOf(swapIndex)] = emptyCornerIndex;
+
+				squarePositions[approachingSquareIndex] = swapIndex;
+
+				updateSquarePositions();
+			}
+		}
+
+		container.addEventListener('mousemove', (e) => {
+			const rect = container.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const y = e.clientY - rect.top;
+
+			cursor.style.left = `${x - 10}px`;
+			cursor.style.top = `${y - 10}px`;
+
+			moveSquaresAwayFromCursor(x, y);
+		});
+
+		container.addEventListener('mouseleave', () => {
+			cursor.style.display = 'none';
+		});
+
+		container.addEventListener('mouseenter', () => {
+			cursor.style.display = 'block';
+		});
+
+		updateSquarePositions();
+	</script>
+</body>
+</html>
