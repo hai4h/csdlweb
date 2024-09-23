@@ -275,66 +275,115 @@ updateClock();
 				<h3>Giải thích</h3>
 				<p>Ví dụ này hiển thị các hình tròn di chuyển khi con trỏ đến gần. Chúng ta sử dụng JavaScript để tính toán khoảng cách giữa con trỏ và các hình tròn, sau đó di chuyển các hình tròn đến vị trí khác nếu chúng quá gần.</p>
 				
-				<h4>1. Tính toán khoảng cách giữa con trỏ và các hình tròn</h4>
-				<p>Chúng ta sử dụng hàm <code>moveSquaresAwayFromCursor()</code> để tính khoảng cách giữa con trỏ và từng hình tròn. Nếu con trỏ tiến gần một hình tròn, hàm sẽ tìm vị trí trống và di chuyển hình tròn đó đến vị trí mới.</p>
-				
-				<pre><code>
-function moveSquaresAwayFromCursor(cursorX, cursorY) {
-	const availableCorners = [0, 1, 2, 3].filter(corner => !squarePositions.includes(corner));
+				<h4>1. Lấy các phần tử HTML</h4>
+                <pre><code>
+const container = document.getElementById('container');
+const squares = document.querySelectorAll('.square');
+const cursor = document.getElementById('cursor');</code></pre>
+                <p><b>container</b>: Lấy phần tử HTML có <code>id</code> là <code>container</code>, đây là phần tử chứa các hình vuông.</p>
+                <p><b>squares</b>: Lấy tất cả các phần tử có class là <code>square</code>, tương ứng với các hình vuông cần di chuyển.</p>
+                <p><b>cursor</b>: Lấy phần tử có <code>id</code> là <code>cursor</code>, để theo dõi và hiển thị vị trí của con trỏ chuột.</p>
 
-	if (availableCorners.length === 0) return;
+                <h4>2. Định nghĩa các giá trị cấu hình</h4>
+                <pre><code>const margin = 25, containerSize = 500, squareSize = 150;</code></pre>
+                <p><b>margin</b>: Khoảng cách giữa các hình vuông và cạnh của khung chứa.</p>
+                <p><b>containerSize</b>: Kích thước của khung chứa (chiều dài và chiều rộng đều là 500px).</p>
+                <p><b>squareSize</b>: Kích thước của mỗi hình vuông (150px).</p>
 
-	const emptyCornerIndex = availableCorners[0];
+                <h4>3. Tạo mảng lưu các vị trí góc</h4>
+                <pre><code>
+const cornerPositions = [
+    { x: margin, y: margin },
+    { x: containerSize - squareSize - margin, y: margin },
+    { x: margin, y: containerSize - squareSize - margin },
+    { x: containerSize - squareSize - margin, y: containerSize - squareSize - margin }
+];
+                </code></pre>
+                <p><b>cornerPositions</b>: Mảng chứa các vị trí góc (tọa độ <code>x</code> và <code>y</code>) của các hình vuông trong khung chứa. Các vị trí này tương ứng với 4 góc của khung chứa:</p>
+                <ul>
+                    <li>Góc trên bên trái</li>
+                    <li>Góc trên bên phải</li>
+                    <li>Góc dưới bên trái</li>
+                    <li>Góc dưới bên phải</li>
+                </ul>
 
-	const approachingSquareIndex = squarePositions.findIndex((_, idx) => {
-		const squarePosition = squarePositions[idx];
-		const { x, y } = cornerPositions[squarePosition];
-		const dx = cursorX - (x + squareSize / 2);
-		const dy = cursorY - (y + squareSize / 2);
-		const distance = Math.sqrt(dx * dx + dy * dy);
-		return distance < 120; // Nếu khoảng cách nhỏ hơn 120px
-	});
+                <h4>4. Mảng lưu các vị trí hiện tại của các hình vuông</h4>
+                <pre><code>
+let squarePositions = [0, 1, 2];
+                </code></pre>
+                <p><b>squarePositions</b>: Mảng chứa các chỉ mục tương ứng với các vị trí hiện tại của các hình vuông. Các giá trị này là chỉ số của các góc trong mảng <code>cornerPositions</code>. Ban đầu, các hình vuông chiếm ba trong bốn góc, chỉ số 0, 1, và 2.</p>
 
-	if (approachingSquareIndex !== -1) {
-		let remainingIndices = squarePositions.filter((pos, idx) => idx !== approachingSquareIndex);
-		let swapIndex = remainingIndices[0];
+                <h4>5. Cập nhật vị trí của các hình vuông</h4>
+                <pre><code>
+const updateSquarePositions = () => {
+    squares.forEach((square, index) => {
+        const { x, y } = cornerPositions[squarePositions[index]];
+        square.style.left = `${x}px`;
+        square.style.top = `${y}px`;
+    });
+};
+                </code></pre>
+                <p><b>updateSquarePositions</b>: Hàm này đặt lại vị trí của các hình vuông theo các chỉ số hiện tại của chúng trong <code>squarePositions</code>. Với mỗi hình vuông, nó lấy tọa độ từ mảng <code>cornerPositions</code> và đặt lại vị trí bằng cách cập nhật CSS <code>left</code> và <code>top</code>.</p>
 
-		squarePositions[squarePositions.indexOf(swapIndex)] = emptyCornerIndex;
-		squarePositions[approachingSquareIndex] = swapIndex;
+                <h4>6. Di chuyển các hình vuông tránh con trỏ chuột</h4>
+                <pre><code>
+const moveSquaresAwayFromCursor = (cursorX, cursorY) => {
+    const availableCorners = [0, 1, 2, 3].filter(corner => !squarePositions.includes(corner));
+    if (availableCorners.length === 0) return;
 
-		updateSquarePositions();
-	}
-}
-				</code></pre>
+    const approachingSquareIndex = squarePositions.findIndex((pos) => {
+        const { x, y } = cornerPositions[pos];
+        const distance = Math.hypot(cursorX - (x + squareSize / 2), cursorY - (y + squareSize / 2));
+        return distance < 120;
+    });
 
-				<h4>2. Cập nhật vị trí của các hình tròn</h4>
-				<p>Sau khi tìm được vị trí mới, chúng ta sử dụng hàm <code>updateSquarePositions()</code> để thay đổi vị trí của các hình tròn.</p>
-				
-				<pre><code>
-function updateSquarePositions() {
-	squares.forEach((square, index) => {
-		const position = cornerPositions[squarePositions[index]];
-		square.style.left = `${position.x}px`;
-		square.style.top = `${position.y}px`;
-	});
-}
-				</code></pre>
+    if (approachingSquareIndex !== -1) {
+        const [emptyCorner] = availableCorners;
+        const swapIndex = squarePositions.find((_, idx) => idx !== approachingSquareIndex);
+        squarePositions[squarePositions.indexOf(swapIndex)] = emptyCorner;
+        squarePositions[approachingSquareIndex] = swapIndex;
+        updateSquarePositions();
+    }
+};
+                </code></pre>
+                <p><b>moveSquaresAwayFromCursor</b>: Hàm này xử lý việc di chuyển các hình vuông khi con trỏ chuột đến gần chúng.</p>
+                <ul>
+                    <li><b>availableCorners</b>: Lọc ra những vị trí góc còn trống (chưa có hình vuông nào).</li>
+                    <li><b>approachingSquareIndex</b>: Tìm chỉ số của hình vuông gần nhất với con trỏ chuột (nếu khoảng cách giữa hình vuông và con trỏ nhỏ hơn 120px).</li>
+                    <li><b>Math.hypot</b>: Hàm tính toán khoảng cách giữa con trỏ chuột và tâm của hình vuông.</li>
+                    <li>Nếu một hình vuông đang gần con trỏ chuột, nó sẽ di chuyển hình vuông này đến góc trống và cập nhật vị trí của các hình vuông.</li>
+                </ul>
 
-				<h4>3. Di chuyển con trỏ</h4>
-				<p>Khi con trỏ di chuyển trong vùng chứa, chúng ta sử dụng <code>mousemove</code> để thay đổi vị trí của con trỏ tùy chỉnh, đồng thời gọi hàm <code>moveSquaresAwayFromCursor()</code> để di chuyển các hình tròn.</p>
-				
-				<pre><code>
+                <h4>7. Sự kiện di chuyển chuột (mousemove)</h4>
+                <pre><code>
 container.addEventListener('mousemove', (e) => {
-	const rect = container.getBoundingClientRect();
-	const x = e.clientX - rect.left;
-	const y = e.clientY - rect.top;
-
-	cursor.style.left = `${x - 10}px`;
-	cursor.style.top = `${y - 10}px`;
-
-	moveSquaresAwayFromCursor(x, y);
+    const { left, top } = container.getBoundingClientRect();
+    const x = e.clientX - left, y = e.clientY - top;
+    cursor.style.left = `${x - 10}px`;
+    cursor.style.top = `${y - 10}px`;
+    moveSquaresAwayFromCursor(x, y);
 });
-				</code></pre>
+                </code></pre>
+                <p>Khi con trỏ chuột di chuyển trong vùng chứa (<code>container</code>):</p>
+                <ul>
+                    <li>Lấy tọa độ chuột tương đối so với khung chứa.</li>
+                    <li>Cập nhật vị trí của con trỏ hiển thị (<code>cursor</code>).</li>
+                    <li>Gọi hàm <code>moveSquaresAwayFromCursor</code> để di chuyển các hình vuông nếu cần.</li>
+                </ul>
+
+                <h4>8. Sự kiện khi chuột rời khỏi hoặc đi vào vùng chứa</h4>
+                <pre><code>
+container.addEventListener('mouseleave', () => cursor.style.display = 'none');
+container.addEventListener('mouseenter', () => cursor.style.display = 'block');
+                </code></pre>
+                <p><b>mouseleave</b>: Ẩn con trỏ khi chuột rời khỏi khung chứa.</p>
+                <p><b>mouseenter</b>: Hiển thị lại con trỏ khi chuột quay trở lại.</p>
+
+                <h4>9. Cập nhật vị trí ban đầu của các hình vuông</h4>
+                 <pre><code>
+updateSquarePositions();
+                </code></pre>
+                <p>Cuối cùng, khi trang được tải, hàm <code>updateSquarePositions</code> được gọi để thiết lập vị trí ban đầu của các hình vuông.</p>
 			</div>
 
 		</div>
@@ -392,81 +441,60 @@ container.addEventListener('mousemove', (e) => {
     </script>
 	
 	<script>
-		const container = document.getElementById('container');
-		const squares = document.querySelectorAll('.square');
-		const cursor = document.getElementById('cursor');
-
-		const margin = 25;
-		const containerSize = 500;
-		const squareSize = 150;
-
-		const cornerPositions = [
-			{ x: margin, y: margin },
-			{ x: containerSize - squareSize - margin, y: margin },
-			{ x: margin, y: containerSize - squareSize - margin },
-			{ x: containerSize - squareSize - margin, y: containerSize - squareSize - margin }
-		];
-
-		let squarePositions = [0, 1, 2];
-
-		function updateSquarePositions() {
-			squares.forEach((square, index) => {
-				const position = cornerPositions[squarePositions[index]];
-				square.style.left = `${position.x}px`;
-				square.style.top = `${position.y}px`;
-			});
-		}
-
-		function moveSquaresAwayFromCursor(cursorX, cursorY) {
-			const availableCorners = [0, 1, 2, 3].filter(corner => !squarePositions.includes(corner));
-
-			if (availableCorners.length === 0) return;
-
-			const emptyCornerIndex = availableCorners[0];
-
-			const approachingSquareIndex = squarePositions.findIndex((_, idx) => {
-				const squarePosition = squarePositions[idx];
-				const { x, y } = cornerPositions[squarePosition];
-				const dx = cursorX - (x + squareSize / 2);
-				const dy = cursorY - (y + squareSize / 2);
-				const distance = Math.sqrt(dx * dx + dy * dy);
-				return distance < 120;
-			});
-
-			if (approachingSquareIndex !== -1) {
-				let remainingIndices = squarePositions.filter((pos, idx) => idx !== approachingSquareIndex);
-				let swapIndex;
-
-				swapIndex = remainingIndices[0];
-
-				squarePositions[squarePositions.indexOf(swapIndex)] = emptyCornerIndex;
-
-				squarePositions[approachingSquareIndex] = swapIndex;
-
-				updateSquarePositions();
-			}
-		}
-
-		container.addEventListener('mousemove', (e) => {
-			const rect = container.getBoundingClientRect();
-			const x = e.clientX - rect.left;
-			const y = e.clientY - rect.top;
-
-			cursor.style.left = `${x - 10}px`;
-			cursor.style.top = `${y - 10}px`;
-
-			moveSquaresAwayFromCursor(x, y);
-		});
-
-		container.addEventListener('mouseleave', () => {
-			cursor.style.display = 'none';
-		});
-
-		container.addEventListener('mouseenter', () => {
-			cursor.style.display = 'block';
-		});
-
-		updateSquarePositions();
-	</script>
+        const container = document.getElementById('container');
+        const squares = document.querySelectorAll('.square');
+        const cursor = document.getElementById('cursor');
+    
+        const margin = 25, containerSize = 500, squareSize = 150;
+        const cornerPositions = [
+            { x: margin, y: margin },
+            { x: containerSize - squareSize - margin, y: margin },
+            { x: margin, y: containerSize - squareSize - margin },
+            { x: containerSize - squareSize - margin, y: containerSize - squareSize - margin }
+        ];
+    
+        let squarePositions = [0, 1, 2];
+    
+        const updateSquarePositions = () => {
+            squares.forEach((square, index) => {
+                const { x, y } = cornerPositions[squarePositions[index]];
+                square.style.left = `${x}px`;
+                square.style.top = `${y}px`;
+            });
+        };
+    
+        const moveSquaresAwayFromCursor = (cursorX, cursorY) => {
+            const availableCorners = [0, 1, 2, 3].filter(corner => !squarePositions.includes(corner));
+            if (availableCorners.length === 0) return;
+    
+            const approachingSquareIndex = squarePositions.findIndex((pos) => {
+                const { x, y } = cornerPositions[pos];
+                const distance = Math.hypot(cursorX - (x + squareSize / 2), cursorY - (y + squareSize / 2));
+                return distance < 120;
+            });
+    
+            if (approachingSquareIndex !== -1) {
+                const [emptyCorner] = availableCorners;
+                const swapIndex = squarePositions.find((_, idx) => idx !== approachingSquareIndex);
+                squarePositions[squarePositions.indexOf(swapIndex)] = emptyCorner;
+                squarePositions[approachingSquareIndex] = swapIndex;
+                updateSquarePositions();
+            }
+        };
+    
+        container.addEventListener('mousemove', (e) => {
+            const { left, top } = container.getBoundingClientRect();
+            const x = e.clientX - left, y = e.clientY - top;
+            cursor.style.left = `${x - 10}px`;
+            cursor.style.top = `${y - 10}px`;
+            moveSquaresAwayFromCursor(x, y);
+        });
+    
+        container.addEventListener('mouseleave', () => cursor.style.display = 'none');
+        container.addEventListener('mouseenter', () => cursor.style.display = 'block');
+    
+        updateSquarePositions();
+    </script>
+    
 </body>
 </html>
