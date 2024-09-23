@@ -98,7 +98,7 @@
             background-color: #f0f0f0;
             border: 2px solid #333;
             color: #333;
-            box-shadow: 0 0 40px white;
+            box-shadow: 0 0 80px white;
         }
         .dark-mode .dark-mode-btn:hover {
             background-color: #45a049;
@@ -138,6 +138,30 @@
             background-color: #2b2b2b;
             color: #e0e0e0;
         }
+        .bulb {
+        width: 50px;
+        height: 50px;
+        background-color: #dfdfdf;
+        border: 1px solid #adadad;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        margin: 0 auto;
+        position: relative;
+      }
+      .body-bulb {
+        width: 25px;
+        height: 30px;
+        background-color: #545252;
+        margin: auto;
+        margin-top: -10px;
+        margin-bottom: 30px;
+        border-bottom-right-radius: 15px;
+        border-bottom-left-radius: 15px;
+      }
+      .bulb.on {
+        background-color: yellow;
+        box-shadow: 0 0 50px yellow;
+      }
 
     </style>
 </head>
@@ -152,6 +176,11 @@
                 <h2>1. Thay đổi nội dung</h2>
                 <p id="demo">Nhấn nút để thay đổi nội dung này.</p>
                 <button onclick="changeText()">Thay đổi nội dung</button>
+                <hr style="opacity: 0">
+                <p id="demo">Nhấn nút để bật/tắt bóng đèn.</p>
+                <div class="bulb" id="bulb"></div>
+                <div class="body-bulb"></div>
+                <button onclick="toggleLight()">Bật/Tắt đèn</button>
             </div>
             <div class="explanation">
                 <h3>Giải thích</h3>
@@ -233,7 +262,7 @@ updateClock();
 		
 		<div class="example">
 			<div class="demo">
-				<h2>4. Các hình tròn tránh con trỏ</h2>
+				<h2>4. Các hình tròn di chuyển theo vị trí con trỏ</h2>
 				<p>Di chuyển chuột vào vùng dưới đây để xem hiệu ứng các hình tròn di chuyển theo vị trí con trỏ.</p>
 				<div id="container" style="width: 500px; height: 500px; background-color: #ddd; position: relative; border-radius: 25px;">
 					<div class="square" id="square1" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
@@ -318,6 +347,11 @@ container.addEventListener('mousemove', (e) => {
         } 
         function changeText() {
             document.getElementById("demo").innerHTML = "Nội dung đã được thay đổi!";
+        }
+
+        function toggleLight() {
+          const bulb = document.getElementById("bulb");
+          bulb.classList.toggle("on");
         }
 
         function addNumbers() {
