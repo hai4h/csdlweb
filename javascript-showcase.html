@@ -79,14 +79,12 @@
             text-align: center;
             letter-spacing: 3px;
         }
-        .dark-mode-toggle {
+        .dark-mode-btn {
             position: fixed;
             top: 20px;
             right: 20px;
             display: flex;
             align-items: center;
-        }
-        .dark-mode-btn {
             background-color: #333;
             border: 2px solid #f0f0f0;
             color: #f0f0f0;
@@ -142,9 +140,7 @@
     </style>
 </head>
 <body>
-    <div class="dark-mode-toggle">
-        <button id="darkModeToggle" class="dark-mode-btn">Dark Mode</button>
-    </div>
+    <button class="dark-mode-btn" onclick="goDark()">Toggle Light/Dark</button>
 
     <div class="container">
         <h1>JavaScript Showcase</h1>
@@ -314,6 +310,10 @@ container.addEventListener('mousemove', (e) => {
     </div>
 
     <script>
+        function goDark() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+        } 
         function changeText() {
             document.getElementById("demo").innerHTML = "Nội dung đã được thay đổi!";
         }
@@ -432,35 +432,5 @@ container.addEventListener('mousemove', (e) => {
 
 		updateSquarePositions();
 	</script>
-
-    <script>
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const body = document.body;
-
-        // Kiểm tra trạng thái dark mode từ localStorage
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            enableDarkMode();
-        }
-
-        darkModeToggle.addEventListener('click', () => {
-            if (body.classList.contains('dark-mode')) {
-                disableDarkMode();
-            } else {
-                enableDarkMode();
-            }
-        });
-
-        function enableDarkMode() {
-            body.classList.add('dark-mode');
-            darkModeToggle.textContent = 'Light Mode';
-            localStorage.setItem('darkMode', 'enabled');
-        }
-
-        function disableDarkMode() {
-            body.classList.remove('dark-mode');
-            darkModeToggle.textContent = 'Dark Mode';
-            localStorage.setItem('darkMode', 'disabled');
-        }
-    </script>
 </body>
 </html>
