@@ -12,6 +12,7 @@
             margin: 0;
             padding: 20px;
             background-color: #f4f4f4;
+            transition: background-color 0.3s, color 0.3s;
         }
         .container {
             max-width: 1200px;
@@ -78,11 +79,67 @@
             text-align: center;
             letter-spacing: 3px;
         }
-        
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .dark-mode-btn {
+            background-color: #f0f0f0;
+            border: 2px solid #333;
+            color: #333;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-mode-btn:hover {
+            background-color: #e0e0e0;
+        }
+        .dark-mode {
+            background-color: #000000;
+            color: #e0e0e0;
+        }
+        .dark-mode .container {
+            background-color: #555;
+            color: #e0e0e0;
+        }
+        .dark-mode .container>h1 {
+            color: #e0e0e0;
+        }
+        .dark-mode .example {
+            background-color: #3a3a3a;
+            color: #e0e0e0;
+        }
+        .dark-mode .demo {
+            background-color: #3a3a3a;
+            color: #e0e0e0;
+        }
+        .dark-mode .demo>h2 {
+            color: #e0e0e0;
+        }
+        .dark-mode .explanation {
+            background-color: #3a3a3a;
+            color: #e0e0e0;
+        }
+        .dark-mode code {
+            background-color: #2b2b2b;
+            color: #e0e0e0;
+        }
+        .dark-mode pre {
+            background-color: #2b2b2b;
+            color: #e0e0e0;
+        }
 
     </style>
 </head>
 <body>
+    <div class="dark-mode-toggle">
+        <button id="darkModeToggle" class="dark-mode-btn">Toggle Dark Mode</button>
+    </div>
+
     <div class="container">
         <h1>JavaScript Showcase</h1>
         
@@ -173,17 +230,17 @@ updateClock();
 		<div class="example">
 			<div class="demo">
 				<h2>4. Các hình tròn tránh con trỏ</h2>
-				<p>Di chuyển chuột vào vùng dưới đây để xem hiệu ứng các hình tròn di chuyển để tránh con trỏ.</p>
+				<p>Di chuyển chuột vào vùng dưới đây để xem hiệu ứng các hình tròn di chuyển theo vị trí con trỏ.</p>
 				<div id="container" style="width: 500px; height: 500px; background-color: #ddd; position: relative; border-radius: 25px;">
-					<div class="square" id="square1" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 50%;"></div>
-					<div class="square" id="square2" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 50%;"></div>
-					<div class="square" id="square3" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 50%;"></div>
+					<div class="square" id="square1" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 30%;"></div>
+					<div class="square" id="square2" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 30%;"></div>
+					<div class="square" id="square3" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 30%;"></div>
 					<div id="cursor" style="width: 20px; height: 20px; border-radius: 50%; background-color: rgba(231, 76, 60, 0.7); position: absolute; pointer-events: none;"></div>
 				</div>
 			</div>
 			<div class="explanation">
 				<h3>Giải thích</h3>
-				<p>Ví dụ này hiển thị các hình tròn di chuyển để tránh con trỏ khi nó đến gần. Chúng ta sử dụng JavaScript để tính toán khoảng cách giữa con trỏ và các hình tròn, sau đó di chuyển các hình tròn đến vị trí khác nếu chúng quá gần.</p>
+				<p>Ví dụ này hiển thị các hình tròn di chuyển khi con trỏ đến gần. Chúng ta sử dụng JavaScript để tính toán khoảng cách giữa con trỏ và các hình tròn, sau đó di chuyển các hình tròn đến vị trí khác nếu chúng quá gần.</p>
 				
 				<h4>1. Tính toán khoảng cách giữa con trỏ và các hình tròn</h4>
 				<p>Chúng ta sử dụng hàm <code>moveSquaresAwayFromCursor()</code> để tính khoảng cách giữa con trỏ và từng hình tròn. Nếu con trỏ tiến gần một hình tròn, hàm sẽ tìm vị trí trống và di chuyển hình tròn đó đến vị trí mới.</p>
@@ -369,5 +426,35 @@ container.addEventListener('mousemove', (e) => {
 
 		updateSquarePositions();
 	</script>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        // Kiểm tra trạng thái dark mode từ localStorage
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            enableDarkMode();
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+
+        function enableDarkMode() {
+            body.classList.add('dark-mode');
+            darkModeToggle.textContent = 'Light Mode';
+            localStorage.setItem('darkMode', 'enabled');
+        }
+
+        function disableDarkMode() {
+            body.classList.remove('dark-mode');
+            darkModeToggle.textContent = 'Dark Mode';
+            localStorage.setItem('darkMode', 'disabled');
+        }
+    </script>
 </body>
 </html>
