@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="188icon.png" type="image/x-icon">
     <title>JavaScript Showcase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -30,14 +31,12 @@
             display: flex;
             margin-bottom: 40px;
             background: #eee;
-            padding: 20px;
+            padding: 10px;
             border-radius: 5px;
         }
         .demo {
             flex: 1;
-            padding-right: 20px;
             text-align: center;
-            justify-content: center;
             max-width: 40%;
         }
         .demo>#clock{
@@ -228,13 +227,89 @@
             margin: auto;
         } 
         .sub-example {
-            margin-bottom: 30px;
+            margin-top: 30px;
             padding: 20px;
             max-width: 45%;
         }
 
         .sub-example h3 {
             margin-top: 0;
+        }
+
+        /* Custom styles for Prism */
+        pre[class*="language-"] {
+            background: #f5f2f0;
+            margin: 0;
+            padding: 1em;
+            overflow: auto;
+        }
+
+        .dark-mode pre[class*="language-"] {
+            background: #2b2b2b;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .token.comment,
+        .dark-mode .token.prolog,
+        .dark-mode .token.doctype,
+        .dark-mode .token.cdata {
+            color: #999;
+        }
+
+        .dark-mode .token.punctuation {
+            color: #ccc;
+        }
+
+        .dark-mode .token.property,
+        .dark-mode .token.tag,
+        .dark-mode .token.boolean,
+        .dark-mode .token.number,
+        .dark-mode .token.constant,
+        .token.symbol,
+        .token.deleted {
+            color: #ff8b50;
+        }
+
+        .dark-mode .token.selector,
+        .dark-mode .token.attr-name,
+        .dark-mode .token.string,
+        .dark-mode .token.char,
+        .dark-mode .token.builtin,
+        .dark-mode .token.inserted {
+            color: #a5e075;
+        }
+
+        .dark-mode .token.operator,
+        .dark-mode .token.entity,
+        .dark-mode .token.url,
+        .dark-mode .language-css .token.string,
+        .dark-mode .style .token.string {
+            color: #67cdcc;
+            background: none;
+        }
+
+        .dark-mode .token.atrule,
+        .dark-mode .token.attr-value,
+        .dark-mode .token.keyword {
+            color: #e683d9;
+        }
+
+        .dark-mode .token.function,
+        .dark-mode .token.class-name {
+            color: #ffa07a;
+        }
+
+        .dark-mode .token.regex,
+        .dark-mode .token.important,
+        .dark-mode .token.variable {
+            color: #a5e075;
+        }
+
+        /* Remove any text shadow */
+        .dark-mode pre[class*="language-"],
+        .dark-mode code[class*="language-"],
+        .dark-mode .token {
+            text-shadow: none !important;
         }
     </style>
 </head>
@@ -269,7 +344,7 @@
                 <h3>Giải thích</h3>
                 <p><strong>Ứng dụng:</strong> <em>Thao tác DOM và quản lý trạng thái</em></p>
                 <p>Trong ví dụ này, chúng ta sử dụng JavaScript để thay đổi nội dung của một phần tử HTML khi người dùng nhn nút, và cho phép khôi phục nội dung ban đầu khi nhấn lại.</p>
-                <pre><code>
+                <pre><code class="language-javascript">
 let originalText = ""
 let isChanged = false
 
@@ -338,7 +413,7 @@ function changeText() {
                 <h3>Giải thích</h3>
                 <p><strong>Ứng dụng:</strong> <em>Thao tác, biến đổi lớp</em></p>
                 <p>Ví dụ này minh họa việc bật và tắt bóng đèn bằng cách sử dụng JavaScript để thay đổi lớp CSS của một phần tử HTML.</p>
-                <pre><code>
+                <pre><code class="language-javascript">
 function toggleLight() {
     const bulb = document.getElementById("bulb");
     bulb.classList.toggle("on");
@@ -355,11 +430,11 @@ function toggleLight() {
             </div>
             
             <div class="sub-example">
-                <h3>1. Cộng hai số</h3>
-                <input type="number" id="num1" placeholder="Số thứ nhất">
-                <input type="number" id="num2" placeholder="Số thứ hai">
-                <button onclick="addNumbers()">Cộng</button>
-                <p id="result"></p>
+                <h3 style="text-align: center;">Cộng hai số</h3>
+                <input type="number" id="num1" placeholder="Số thứ nhất" style="margin-left: 10px;">
+                <input type="number" id="num2" placeholder="Số thứ hai" style="margin-left: 10px;">
+                <button onclick="addNumbers()" style="margin-left: 50px;">Cộng</button>
+                <p id="result" style="margin-left: 10px;"></p>
                 
                 <div class="explanation">
                     <h4>Giải thích</h4>
@@ -386,7 +461,7 @@ function addNumbers() {
             <hr style="opacity: 0">
 
             <div class="sub-example">
-                <h3>2. Giải phương trình bậc hai</h3>
+                <h3 style="text-align: center;">Giải phương trình bậc hai</h3>
                 <p>Nhập các hệ số của phương trình ax² + bx + c = 0</p>
                 <input type="number" id="coef-a" placeholder="a">
                 <input type="number" id="coef-b" placeholder="b">
@@ -454,7 +529,7 @@ function solveQuadraticEquation() {
                 <p><strong>Ứng dụng:</strong> <em>Bộ hẹn giờ và đối tượng Date</em></p>
                 <h3>Giải thích</h3>
                 <p>Ví dụ này hiển thị một đồng hồ thời gian thực, được cập nhật liên tục bằng JavaScript. Hãy phân tích chi tiết từng phần của mã:</p>
-                <pre><code>
+                <pre><code class="language-javascript">
 function updateClock() {
     var date = new Date();
     var h = date.getHours(); // 0 - 23
@@ -521,7 +596,7 @@ updateClock();
                 <h3>Giải thích</h3>
                 <p><strong>Ứng dụng:</strong> <em>Xử lí sự kiện và định vị đng cho phần tử</em></p>
                 <p>Ví dụ này hiển thị các hình tròn di chuyển khi con trỏ đến gần. Chúng ta sử dụng JavaScript để tính toán khoảng cách giữa con trỏ và các hình tròn, sau đó di chuyển các hình tròn đến vị trí khác nếu chúng quá gần. Dưới đây là giải thích chi tiết về từng phần của mã:</p>
-                <pre><code>
+                <pre><code class="language-javascript">
 const container = document.getElementById('container');
 const squares = document.querySelectorAll('.square');
 const cursor = document.getElementById('cursor');
@@ -543,7 +618,7 @@ let squarePositions = [0, 1, 2];
                     <li><code>cornerPositions</code> là một mảng chứa tọa độ của bốn góc trong container. Mỗi góc được biểu diễn bằng một đối tượng có thuộc tính x và y.</li>
                     <li><code>squarePositions</code> là một mảng theo dõi vị trí hiện tại của ba hình vuông, sử dụng chỉ số của các góc (0, 1, 2 tương ứng với ba góc đầu tiên).</li>
                 </ul>
-                <pre><code>
+                <pre><code class="language-javascript">
 const updateSquarePositions = () => {
     squares.forEach((square, index) => {
         const { x, y } = cornerPositions[squarePositions[index]];
@@ -558,7 +633,7 @@ const updateSquarePositions = () => {
                     <li>Với mỗi hình vuông, nó lấy tọa độ x và y từ <code>cornerPositions</code> dựa trên chỉ số trong <code>squarePositions</code>.</li>
                     <li>Sau đó, nó cập nhật thuộc tính <code>style.left</code> và <code>style.top</code> của hình vuông để di chuyển nó đến vị trí mới.</li>
                 </ul>
-                <pre><code>
+                <pre><code class="language-javascript">
 const moveSquaresAwayFromCursor = (cursorX, cursorY) => {
     const availableCorners = [0, 1, 2, 3].filter(corner => !squarePositions.includes(corner));
     if (availableCorners.length === 0) return;
@@ -598,7 +673,7 @@ const moveSquaresAwayFromCursor = (cursorX, cursorY) => {
                         </ul>
                     </li>
                 </ol>
-                <pre><code>
+                <pre><code class="language-javascript">
 container.addEventListener('mousemove', (e) => {
     const { left, top } = container.getBoundingClientRect();
     const x = e.clientX - left, y = e.clientY - top;
@@ -629,6 +704,15 @@ updateSquarePositions();
             </div>
         </div>
     </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        // Highlight all code blocks after the page has loaded
+        window.addEventListener('load', function() {
+            Prism.highlightAll();
+        });
+    </script>
     
     <script src="app.js"></script>
     <script src="squares-transtioning.js"></script>
