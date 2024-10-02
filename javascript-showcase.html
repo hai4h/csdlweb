@@ -13,6 +13,7 @@
             padding: 20px;
             background-color: #f4f4f4;
             transition: background-color 0.3s, color 0.3s;
+            font-size: 16px;
         }
         .container {
             max-width: 78%;
@@ -37,6 +38,7 @@
             padding-right: 20px;
             text-align: center;
             justify-content: center;
+            max-width: 40%;
         }
         .demo>#clock{
             margin-top: 100px;
@@ -52,9 +54,11 @@
         .explanation {
             flex: 1;
             padding-left: 20px;
-            border-left: 1px solid #5a5a5a;
             overflow: auto;
+            background-color: #f9f9f9;
+            padding: 15px;
         }
+        
         button {
             padding: 10px;
             background-color: #4CAF50;
@@ -139,6 +143,18 @@
             background-color: #2b2b2b;
             color: #e0e0e0;
         }
+        .dark-mode .tab {
+            background-color: #3a3a3a;
+            color: #e0e0e0;
+        }
+        .dark-mode .tab button {
+            background-color: #3a3a3a;
+            color: #e0e0e0;
+        }
+        .dark-mode .tab button.active {
+            background-color: #696969;
+            color: #b1b1b1;
+        }
         .bulb {
             width: 50px;
             height: 50px;
@@ -163,6 +179,63 @@
             background-color: yellow;
             box-shadow: 0 0 50px yellow;
         }
+         /* Style the tab */
+        .tab {
+            color: #000;
+            overflow: hidden;
+            background-color: #dfdfdf;
+            border-radius: 10px;
+            text-align: center;
+            margin: auto;
+        }
+
+        /* Style the buttons that are used to open the tab content */
+        .tab button {
+            color: #000;
+            background-color: inherit;
+            float: center;
+            border: #555;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            border-radius: 10px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #a0a0a0;
+            border-radius: 10px;
+            text-align: center;
+            margin: auto;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #a0a0a0;
+            border-radius: 10px;
+            text-align: center;
+            margin: auto;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #a0a0a0;
+            border-top: none;
+            text-align: center;
+            margin: auto;
+        } 
+        .sub-example {
+            margin-bottom: 30px;
+            padding: 20px;
+            max-width: 45%;
+        }
+
+        .sub-example h3 {
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -170,29 +243,90 @@
 
     <div class="container">
         <h1><img src="188icon.png"> JavaScript Nhom 2</h1>
+
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'home')">
+                <i class="fas fa-home"></i> Home
+            </button>
+            <button class="tablinks" onclick="openTab(event, 'exp1')">Thay đổi nội dung</button>
+            <button class="tablinks" onclick="openTab(event, 'exp2')">Thay đổi thuộc tính</button>
+            <button class="tablinks" onclick="openTab(event, 'exp3')">Tính toán số học</button>
+            <button class="tablinks" onclick="openTab(event, 'exp4')">Đồng hồ thời gian thực</button>
+            <button class="tablinks" onclick="openTab(event, 'exp5')">Các hình tròn di chuyển theo vị trí con trỏ</button>
+        </div>
+
+        <hr style="opacity: 0">
         
-        <div class="example">
+        <div class="example" id="exp1">
             <div class="demo">
                 <h2>1. Thay đổi nội dung</h2>
                 <p id="demo">Nhấn nút để thay đổi nội dung này.</p>
-                <button onclick="changeText()">Thay đổi nội dung</button>
+                <button onclick="changeText()">Thay đổi/Khôi phục nội dung</button>
                 <hr style="opacity: 0">
                 
             </div>
             <div class="explanation">
                 <h3>Giải thích</h3>
-                <p><strong>Ứng dụng:</strong> <em>Thao tác DOM</em></p>
-                <p>Trong ví dụ này, chúng ta sử dụng JavaScript để thay đổi nội dung của một phần tử HTML khi người dùng nhấn nút.</p>
+                <p><strong>Ứng dụng:</strong> <em>Thao tác DOM và quản lý trạng thái</em></p>
+                <p>Trong ví dụ này, chúng ta sử dụng JavaScript để thay đổi nội dung của một phần tử HTML khi người dùng nhn nút, và cho phép khôi phục nội dung ban đầu khi nhấn lại.</p>
                 <pre><code>
+let originalText = ""
+let isChanged = false
+
 function changeText() {
-    document.getElementById("demo").innerHTML = "Nội dung đã được thay đổi!";
+    const demoElement = document.getElementById("demo")
+    
+    if (!demoElement) {
+        console.error("Không tìm thấy phần tử có id 'demo'")
+        return
+    }
+    
+    if (!isChanged) {
+        originalText = demoElement.innerHTML
+        demoElement.innerHTML = "Nội dung đã được thay đổi!"
+        isChanged = true
+    } else {
+        demoElement.innerHTML = originalText
+        isChanged = false
+    }
+    
+    console.log("Nội dung hiện tại:", demoElement.innerHTML)
 }
                 </code></pre>
-                <p>Hàm <code>changeText()</code> sử dụng <code>document.getElementById()</code> để tìm phần tử có id là "demo", sau đó thay đổi nội dung HTML của nó bằng cách gán giá trị mới cho thuộc tính <code>innerHTML</code>.</p>
+                <p>Giải thích chi tiết:</p>
+                <ol>
+                    <li>Chúng ta sử dụng hai biến toàn cục:
+                        <ul>
+                            <li><code>originalText</code>: để lưu trữ nội dung ban đầu của phần tử.</li>
+                            <li><code>isChanged</code>: để theo dõi trạng thái hiện tại của nội dung (đã thay đổi hay chưa).</li>
+                        </ul>
+                    </li>
+                    <li>Hàm <code>changeText()</code> thực hiện các bước sau:
+                        <ul>
+                            <li>Tìm phần tử có id "demo" bằng <code>document.getElementById()</code>.</li>
+                            <li>Kiểm tra xem phần tử có tồn tại không. Nếu không, hiển thị lỗi và kết thúc hàm.</li>
+                            <li>Nếu nội dung chưa được thay đổi (<code>!isChanged</code>):
+                                <ul>
+                                    <li>Lưu nội dung hiện tại vào <code>originalText</code>.</li>
+                                    <li>Thay đổi nội dung thành "Nội dung đã được thay đổi!".</li>
+                                    <li>Đặt <code>isChanged</code> thành <code>true</code>.</li>
+                                </ul>
+                            </li>
+                            <li>Nếu nội dung đã được thay đổi:
+                                <ul>
+                                    <li>Khôi phục nội dung ban đầu từ <code>originalText</code>.</li>
+                                    <li>Đặt <code>isChanged</code> thành <code>false</code>.</li>
+                                </ul>
+                            </li>
+                            <li>Ghi log nội dung hiện tại ra console để dễ dàng theo dõi.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>Cách tiếp cận này cho phép người dùng chuyển đổi giữa nội dung ban đầu và nội dung đã thay đổi bằng cách nhấn nút nhiều lần. Nó cũng bao gồm xử lý lỗi cơ bản và logging để giúp gỡ lỗi.</p>
             </div>
         </div>
 
-        <div class="example">
+        <div class="example" id="exp2">
             <div class="demo">
                 <h2>2. Thay đổi thuộc tính</h2>
                 <p id="demo">Nhấn nút để bật/tắt bóng đèn.</p>
@@ -214,32 +348,104 @@ function toggleLight() {
             </div>
         </div>
 
-        <div class="example">
+        <div class="example" id="exp3">
             <div class="demo">
-                <h2>3. Tính toán đơn giản</h2>
-                <p>Nhập hai số để cộng:</p>
+                <h2>3. Tính toán số học</h2>
+                <br>
+            </div>
+            
+            <div class="sub-example">
+                <h3>1. Cộng hai số</h3>
                 <input type="number" id="num1" placeholder="Số thứ nhất">
                 <input type="number" id="num2" placeholder="Số thứ hai">
                 <button onclick="addNumbers()">Cộng</button>
                 <p id="result"></p>
-            </div>
-            <div class="explanation">
-                <p><strong>Ứng dụng:</strong> <em>Xử lý sự kiện và phép toán số học</em></p>
-                <h3>Giải thích</h3>
-                <p>Ví dụ này minh họa cách JavaScript có thể thực hiện các phép tính và tương tác với đầu vào của người dùng.</p>
-                <pre><code>
+                
+                <div class="explanation">
+                    <h4>Giải thích</h4>
+                    <p><strong>Ứng dụng:</strong> <em>Tính tổng hai số</em></p>
+                    <p>Hàm <code>addNumbers()</code> thực hiện các bước sau:</p>
+                    <ul>
+                        <li>Lấy giá trị từ hai input bằng <code>document.getElementById().value</code>.</li>
+                        <li>Chuyển đổi giá trị từ chuỗi sang số bằng <code>parseFloat()</code>.</li>
+                        <li>Cộng hai số và lưu kết quả.</li>
+                        <li>Hiển thị kết quả trong phần tử HTML có id "result".</li>
+                    </ul>
+                    <pre><code class="language-javascript">
 function addNumbers() {
     var num1 = parseFloat(document.getElementById("num1").value);
     var num2 = parseFloat(document.getElementById("num2").value);
     var sum = num1 + num2;
     document.getElementById("result").innerHTML = "Kết quả: " + sum;
 }
-                </code></pre>
-                <p>Hàm <code>addNumbers()</code> lấy giá trị từ hai trường input, chuyển đổi chúng thành số thực với <code>parseFloat()</code>, thực hiện phép cộng, và hiển thị kết quả.</p>
+                    </code></pre>
+                    <p>Ví dụ này minh họa cách JavaScript xử lý input người dùng và thực hiện phép tính đơn giản.</p>
+                </div>
+            </div>
+
+            <hr style="opacity: 0">
+
+            <div class="sub-example">
+                <h3>2. Giải phương trình bậc hai</h3>
+                <p>Nhập các hệ số của phương trình ax² + bx + c = 0</p>
+                <input type="number" id="coef-a" placeholder="a">
+                <input type="number" id="coef-b" placeholder="b">
+                <input type="number" id="coef-c" placeholder="c">
+                <button onclick="solveQuadraticEquation()">Giải</button>
+                <p id="equation-result"></p>
+                
+                <div class="explanation">
+                    <h4>Giải thích</h4>
+                    <p><strong>Ứng dụng:</strong> <em>Giải phương trình bậc hai</em></p>
+                    <p>Hàm <code>solveQuadraticEquation()</code> thực hiện các bước sau:</p>
+                    <ol>
+                        <li>Lấy giá trị của các hệ số a, b, c từ input người dùng.</li>
+                        <li>Kiểm tra tính hợp lệ của input.</li>
+                        <li>Tính delta (discriminant) của phương trình: Δ = b² - 4ac.</li>
+                        <li>Dựa vào giá trị của delta, xác định loại nghiệm và tính toán.</li>
+                        <li>Hiển thị kết quả cho người dùng.</li>
+                    </ol>
+                    <pre><code class="language-javascript">
+function solveQuadraticEquation() {
+    const a = parseFloat(document.getElementById("coef-a").value);
+    const b = parseFloat(document.getElementById("coef-b").value);
+    const c = parseFloat(document.getElementById("coef-c").value);
+    const resultElement = document.getElementById("equation-result");
+
+    if (isNaN(a) || isNaN(b) || isNaN(c)) {
+        resultElement.innerHTML = "Vui lòng nhập đầy đủ các hệ số a, b, c.";
+        return;
+    }
+
+    if (a === 0) {
+        resultElement.innerHTML = "Đây không phải là phương trình bậc hai (a phải khác 0).";
+        return;
+    }
+
+    const discriminant = b*b - 4*a*c;
+
+    if (discriminant > 0) {
+        const x1 = (-b + Math.sqrt(discriminant)) / (2*a);
+        const x2 = (-b - Math.sqrt(discriminant)) / (2*a);
+        resultElement.innerHTML = `Phương trình có hai nghiệm phân biệt:<br>x₁ = ${x1.toFixed(2)}<br>x₂ = ${x2.toFixed(2)}`;
+    } else if (discriminant === 0) {
+        const x = -b / (2*a);
+        resultElement.innerHTML = `Phương trình có nghiệm kép:<br>x = ${x.toFixed(2)}`;
+    } else {
+        const realPart = -b / (2*a);
+        const imaginaryPart = Math.sqrt(-discriminant) / (2*a);
+        resultElement.innerHTML = `Phương trình có hai nghiệm phức:<br>
+            x₁ = ${realPart.toFixed(2)} + ${imaginaryPart.toFixed(2)}i<br>
+            x₂ = ${realPart.toFixed(2)} - ${imaginaryPart.toFixed(2)}i`;
+    }
+}
+                    </code></pre>
+                    <p>Ví dụ này minh họa cách JavaScript có thể được sử dụng để thực hiện các phép tính phức tạp và áp dụng kiến thức toán học vào lập trình.</p>
+                </div>
             </div>
         </div>
 
-        <div class="example">
+        <div class="example" id="exp4">
             <div class="demo">
                 <h2>4. Đồng hồ thời gian thực</h2>
                 <p id="clock"></p>
@@ -300,7 +506,7 @@ updateClock();
             </div>
         </div>
 
-        <div class="example">
+        <div class="example" id="exp5">
             <div class="demo">
                 <h2>5. Các hình tròn di chuyển theo vị trí con trỏ</h2>
                 <p>Di chuyển chuột vào vùng dưới đây để xem hiệu ứng các hình tròn di chuyển theo vị trí con trỏ.</p>
@@ -313,7 +519,7 @@ updateClock();
             </div>
             <div class="explanation">
                 <h3>Giải thích</h3>
-                <p><strong>Ứng dụng:</strong> <em>Xử lí sự kiện và định vị động cho phần tử</em></p>
+                <p><strong>Ứng dụng:</strong> <em>Xử lí sự kiện và định vị đng cho phần tử</em></p>
                 <p>Ví dụ này hiển thị các hình tròn di chuyển khi con trỏ đến gần. Chúng ta sử dụng JavaScript để tính toán khoảng cách giữa con trỏ và các hình tròn, sau đó di chuyển các hình tròn đến vị trí khác nếu chúng quá gần. Dưới đây là giải thích chi tiết về từng phần của mã:</p>
                 <pre><code>
 const container = document.getElementById('container');
@@ -386,7 +592,7 @@ const moveSquaresAwayFromCursor = (cursorX, cursorY) => {
                     <li>Nếu tìm thấy hình vuông gần (khoảng cách < 120px):
                         <ul>
                             <li>Chọn một góc trống ngẫu nhiên.</li>
-                            <li>Tìm một hình vuông khác để hoán đổi vị trí.</li>
+                            <li>Tìm mt hình vuông khác để hoán đổi vị trí.</li>
                             <li>Cập nhật <code>squarePositions</code> để phản ánh sự thay đổi vị trí.</li>
                             <li>Gọi <code>updateSquarePositions()</code> để cập nhật vị trí trên màn hình.</li>
                         </ul>
@@ -423,8 +629,9 @@ updateSquarePositions();
             </div>
         </div>
     </div>
-
+    
     <script src="app.js"></script>
     <script src="squares-transtioning.js"></script>
+    <script src="tabs.js"></script>
 </body>
 </html>
