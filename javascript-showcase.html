@@ -15,7 +15,7 @@
             transition: background-color 0.3s, color 0.3s;
         }
         .container {
-            max-width: 1200px;
+            max-width: 78%;
             margin: auto;
             background: white;
             padding: 20px;
@@ -53,7 +53,7 @@
             flex: 1;
             padding-left: 20px;
             border-left: 1px solid #5a5a5a;
-			overflow: auto;
+            overflow: auto;
         }
         button {
             padding: 10px;
@@ -82,7 +82,7 @@
         .dark-mode-btn {
             position: fixed;
             top: 20px;
-            right: 20px;
+            right: 10px;
             display: flex;
             align-items: center;
             background-color: #333;
@@ -93,6 +93,7 @@
             cursor: pointer;
             border-radius: 30px;
             transition: background-color 0.3s, color 0.3s;
+            max-width: 10%;
         }
         .dark-mode .dark-mode-btn {
             background-color: #f0f0f0;
@@ -132,44 +133,43 @@
         }
         .dark-mode code {
             background-color: #2b2b2b;
-            color: #c2bc45;
+            color: #19ffcd;
         }
         .dark-mode pre {
             background-color: #2b2b2b;
             color: #e0e0e0;
         }
         .bulb {
-        width: 50px;
-        height: 50px;
-        background-color: #dfdfdf;
-        border: 1px solid #adadad;
-        border-radius: 50%;
-        transition: all 0.3s ease;
-        margin: 0 auto;
-        position: relative;
-      }
-      .body-bulb {
-        width: 25px;
-        height: 30px;
-        background-color: #545252;
-        margin: auto;
-        margin-top: -10px;
-        margin-bottom: 30px;
-        border-bottom-right-radius: 15px;
-        border-bottom-left-radius: 15px;
-      }
-      .bulb.on {
-        background-color: yellow;
-        box-shadow: 0 0 50px yellow;
-      }
-
+            width: 50px;
+            height: 50px;
+            background-color: #dfdfdf;
+            border: 1px solid #adadad;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            margin: 0 auto;
+            position: relative;
+        }
+        .body-bulb {
+            width: 25px;
+            height: 30px;
+            background-color: #545252;
+            margin: auto;
+            margin-top: -10px;
+            margin-bottom: 30px;
+            border-bottom-right-radius: 15px;
+            border-bottom-left-radius: 15px;
+        }
+        .bulb.on {
+            background-color: yellow;
+            box-shadow: 0 0 50px yellow;
+        }
     </style>
 </head>
 <body>
     <button class="dark-mode-btn" onclick="goDark()">Nền Sáng/Tối</button>
 
     <div class="container">
-        <h1>JavaScript Showcase</h1>
+        <h1><img src="188icon.png"> JavaScript Nhom 2</h1>
         
         <div class="example">
             <div class="demo">
@@ -177,13 +177,11 @@
                 <p id="demo">Nhấn nút để thay đổi nội dung này.</p>
                 <button onclick="changeText()">Thay đổi nội dung</button>
                 <hr style="opacity: 0">
-                <p id="demo">Nhấn nút để bật/tắt bóng đèn.</p>
-                <div class="bulb" id="bulb"></div>
-                <div class="body-bulb"></div>
-                <button onclick="toggleLight()">Bật/Tắt đèn</button>
+                
             </div>
             <div class="explanation">
                 <h3>Giải thích</h3>
+                <p><strong>Ứng dụng:</strong> <em>Thao tác DOM</em></p>
                 <p>Trong ví dụ này, chúng ta sử dụng JavaScript để thay đổi nội dung của một phần tử HTML khi người dùng nhấn nút.</p>
                 <pre><code>
 function changeText() {
@@ -196,7 +194,29 @@ function changeText() {
 
         <div class="example">
             <div class="demo">
-                <h2>2. Tính toán đơn giản</h2>
+                <h2>2. Thay đổi thuộc tính</h2>
+                <p id="demo">Nhấn nút để bật/tắt bóng đèn.</p>
+                <div class="bulb" id="bulb"></div>
+                <div class="body-bulb"></div>
+                <button onclick="toggleLight()">Bật/Tắt đèn</button>
+            </div>
+            <div class="explanation">
+                <h3>Giải thích</h3>
+                <p><strong>Ứng dụng:</strong> <em>Thao tác, biến đổi lớp</em></p>
+                <p>Ví dụ này minh họa việc bật và tắt bóng đèn bằng cách sử dụng JavaScript để thay đổi lớp CSS của một phần tử HTML.</p>
+                <pre><code>
+function toggleLight() {
+    const bulb = document.getElementById("bulb");
+    bulb.classList.toggle("on");
+}
+                </code></pre>
+                <p>Hàm <code>toggleLight()</code> tìm phần tử có <code>id</code> là "bulb" và sử dụng <code>classList.toggle()</code> để thêm hoặc loại bỏ lớp <code>on</code>, thay đổi trạng thái bóng đèn.</p>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="demo">
+                <h2>3. Tính toán đơn giản</h2>
                 <p>Nhập hai số để cộng:</p>
                 <input type="number" id="num1" placeholder="Số thứ nhất">
                 <input type="number" id="num2" placeholder="Số thứ hai">
@@ -204,6 +224,7 @@ function changeText() {
                 <p id="result"></p>
             </div>
             <div class="explanation">
+                <p><strong>Ứng dụng:</strong> <em>Xử lý sự kiện và phép toán số học</em></p>
                 <h3>Giải thích</h3>
                 <p>Ví dụ này minh họa cách JavaScript có thể thực hiện các phép tính và tương tác với đầu vào của người dùng.</p>
                 <pre><code>
@@ -220,12 +241,13 @@ function addNumbers() {
 
         <div class="example">
             <div class="demo">
-                <h2>3. Đồng hồ thời gian thực</h2>
+                <h2>4. Đồng hồ thời gian thực</h2>
                 <p id="clock"></p>
             </div>
             <div class="explanation">
+                <p><strong>Ứng dụng:</strong> <em>Bộ hẹn giờ và đối tượng Date</em></p>
                 <h3>Giải thích</h3>
-                <p>Đây là một ví dụ về cách JavaScript có thể cập nhật nội dung trang web một cách liên tục, tạo ra một đồng hồ thời gian thực.</p>
+                <p>Ví dụ này hiển thị một đồng hồ thời gian thực, được cập nhật liên tục bằng JavaScript. Hãy phân tích chi tiết từng phần của mã:</p>
                 <pre><code>
 function updateClock() {
     var date = new Date();
@@ -256,64 +278,65 @@ function updateClock() {
 
 updateClock();
                 </code></pre>
-                <p>Hàm <code>updateClock()</code> lấy thời gian hiện tại, định dạng nó, và cập nhật nội dung của phần tử "clock". Hàm <code>setTimeout()</code> được sử dụng để gọi lại <code>updateClock()</code> sau mỗi 1000 mili giây (1 giây), tạo ra hiệu ứng cập nhật liên tục.</p>
+                <p>Giải thích chi tiết:</p>
+                <ol>
+                    <li><code>var date = new Date();</code>: Tạo một đối tượng Date mới, đại diện cho thời gian hiện tại.</li>
+                    <li><code>var h = date.getHours();</code>: Lấy giờ hiện tại (0-23).</li>
+                    <li><code>var m = date.getMinutes();</code>: Lấy phút hiện tại (0-59).</li>
+                    <li><code>var s = date.getSeconds();</code>: Lấy giây hiện tại (0-59).</li>
+                    <li><code>var session = "AM";</code>: Mặc định là buổi sáng (AM).</li>
+                    <li>Điều chỉnh giờ:
+                        <ul>
+                            <li>Nếu giờ là 0, đặt lại thành 12 (12 AM).</li>
+                            <li>Nếu giờ lớn hơn 12, trừ đi 12 và đổi session thành "PM".</li>
+                        </ul>
+                    </li>
+                    <li>Thêm số 0 đứng trước nếu giờ, phút hoặc giây nhỏ hơn 10.</li>
+                    <li>Tạo chuỗi thời gian dạng "HH:MM:SS AM/PM".</li>
+                    <li>Cập nhật nội dung của phần tử có id "clock" bằng chuỗi thời gian.</li>
+                    <li><code>setTimeout(updateClock, 1000);</code>: Đặt hẹn giờ để gọi lại hàm <code>updateClock()</code> sau 1 giây (1000 ms).</li>
+                </ol>
+                <p>Hàm <code>updateClock()</code> được gọi lần đầu tiên để khởi động đồng hồ. Sau đó, nó tự gọi lại mỗi giây thông qua <code>setTimeout()</code>, tạo ra một vòng lặp liên tục cập nhật thời gian.</p>
             </div>
         </div>
-		
-		<div class="example">
-			<div class="demo">
-				<h2>4. Các hình tròn di chuyển theo vị trí con trỏ</h2>
-				<p>Di chuyển chuột vào vùng dưới đây để xem hiệu ứng các hình tròn di chuyển theo vị trí con trỏ.</p>
-				<div id="container" style="width: 500px; height: 500px; background-color: #ddd; position: relative; border-radius: 25px;">
-					<div class="square" id="square1" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
-					<div class="square" id="square2" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
-					<div class="square" id="square3" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
-					<div id="cursor" style="width: 20px; height: 20px; border-radius: 50%; background-color: rgba(231, 76, 60, 0.7); position: absolute; pointer-events: none;"></div>
-				</div>
-			</div>
-			<div class="explanation">
-				<h3>Giải thích</h3>
-				<p>Ví dụ này hiển thị các hình tròn di chuyển khi con trỏ đến gần. Chúng ta sử dụng JavaScript để tính toán khoảng cách giữa con trỏ và các hình tròn, sau đó di chuyển các hình tròn đến vị trí khác nếu chúng quá gần.</p>
-				
-				<h4>1. Lấy các phần tử HTML</h4>
+
+        <div class="example">
+            <div class="demo">
+                <h2>5. Các hình tròn di chuyển theo vị trí con trỏ</h2>
+                <p>Di chuyển chuột vào vùng dưới đây để xem hiệu ứng các hình tròn di chuyển theo vị trí con trỏ.</p>
+                <div id="container" style="width: 500px; height: 500px; background-color: #ddd; position: relative; border-radius: 25px;">
+                    <div class="square" id="square1" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
+                    <div class="square" id="square2" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
+                    <div class="square" id="square3" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
+                    <div id="cursor" style="width: 20px; height: 20px; border-radius: 50%; background-color: rgba(231, 76, 60, 0.7); position: absolute; pointer-events: none;"></div>
+                </div>
+            </div>
+            <div class="explanation">
+                <h3>Giải thích</h3>
+                <p><strong>Ứng dụng:</strong> <em>Xử lí sự kiện và định vị động cho phần tử</em></p>
+                <p>Ví dụ này hiển thị các hình tròn di chuyển khi con trỏ đến gần. Chúng ta sử dụng JavaScript để tính toán khoảng cách giữa con trỏ và các hình tròn, sau đó di chuyển các hình tròn đến vị trí khác nếu chúng quá gần. Dưới đây là giải thích chi tiết về từng phần của mã:</p>
                 <pre><code>
 const container = document.getElementById('container');
 const squares = document.querySelectorAll('.square');
-const cursor = document.getElementById('cursor');</code></pre>
-                <p><b>container</b>: Lấy phần tử HTML có <code>id</code> là <code>container</code>, đây là phần tử chứa các hình vuông.</p>
-                <p><b>squares</b>: Lấy tất cả các phần tử có class là <code>square</code>, tương ứng với các hình vuông cần di chuyển.</p>
-                <p><b>cursor</b>: Lấy phần tử có <code>id</code> là <code>cursor</code>, để theo dõi và hiển thị vị trí của con trỏ chuột.</p>
+const cursor = document.getElementById('cursor');
 
-                <h4>2. Định nghĩa các giá trị cấu hình</h4>
-                <pre><code>const margin = 25, containerSize = 500, squareSize = 150;</code></pre>
-                <p><b>margin</b>: Khoảng cách giữa các hình vuông và cạnh của khung chứa.</p>
-                <p><b>containerSize</b>: Kích thước của khung chứa (chiều dài và chiều rộng đều là 500px).</p>
-                <p><b>squareSize</b>: Kích thước của mỗi hình vuông (150px).</p>
-
-                <h4>3. Tạo mảng lưu các vị trí góc</h4>
-                <pre><code>
+const margin = 25, containerSize = 500, squareSize = 150;
 const cornerPositions = [
     { x: margin, y: margin },
     { x: containerSize - squareSize - margin, y: margin },
     { x: margin, y: containerSize - squareSize - margin },
     { x: containerSize - squareSize - margin, y: containerSize - squareSize - margin }
 ];
-                </code></pre>
-                <p><b>cornerPositions</b>: Mảng chứa các vị trí góc (tọa độ <code>x</code> và <code>y</code>) của các hình vuông trong khung chứa. Các vị trí này tương ứng với 4 góc của khung chứa:</p>
-                <ul>
-                    <li>Góc trên bên trái</li>
-                    <li>Góc trên bên phải</li>
-                    <li>Góc dưới bên trái</li>
-                    <li>Góc dưới bên phải</li>
-                </ul>
 
-                <h4>4. Mảng lưu các vị trí hiện tại của các hình vuông</h4>
-                <pre><code>
 let squarePositions = [0, 1, 2];
                 </code></pre>
-                <p><b>squarePositions</b>: Mảng chứa các chỉ mục tương ứng với các vị trí hiện tại của các hình vuông. Các giá trị này là chỉ số của các góc trong mảng <code>cornerPositions</code>. Ban đầu, các hình vuông chiếm ba trong bốn góc, chỉ số 0, 1, và 2.</p>
-
-                <h4>5. Cập nhật vị trí của các hình vuông</h4>
+                <p>Đoạn mã trên khởi tạo các biến và hằng số cần thiết:</p>
+                <ul>
+                    <li><code>container</code>, <code>squares</code>, và <code>cursor</code> là các tham chiếu đến các phần tử DOM. <code>container</code> là phần tử chứa, <code>squares</code> là một NodeList chứa tất cả các hình vuông, và <code>cursor</code> là phần tử đại diện cho con trỏ chuột.</li>
+                    <li><code>margin</code> (25px) là khoảng cách từ cạnh container đến hình vuông, <code>containerSize</code> (500px) là kích thước của container, và <code>squareSize</code> (150px) là kích thước của mỗi hình vuông.</li>
+                    <li><code>cornerPositions</code> là một mảng chứa tọa độ của bốn góc trong container. Mỗi góc được biểu diễn bằng một đối tượng có thuộc tính x và y.</li>
+                    <li><code>squarePositions</code> là một mảng theo dõi vị trí hiện tại của ba hình vuông, sử dụng chỉ số của các góc (0, 1, 2 tương ứng với ba góc đầu tiên).</li>
+                </ul>
                 <pre><code>
 const updateSquarePositions = () => {
     squares.forEach((square, index) => {
@@ -323,9 +346,12 @@ const updateSquarePositions = () => {
     });
 };
                 </code></pre>
-                <p><b>updateSquarePositions</b>: Hàm này đặt lại vị trí của các hình vuông theo các chỉ số hiện tại của chúng trong <code>squarePositions</code>. Với mỗi hình vuông, nó lấy tọa độ từ mảng <code>cornerPositions</code> và đặt lại vị trí bằng cách cập nhật CSS <code>left</code> và <code>top</code>.</p>
-
-                <h4>6. Di chuyển các hình vuông tránh con trỏ chuột</h4>
+                <p>Hàm <code>updateSquarePositions</code> cập nhật vị trí của các hình vuông trên màn hình:</p>
+                <ul>
+                    <li>Nó lặp qua mỗi hình vuông trong <code>squares</code>.</li>
+                    <li>Với mỗi hình vuông, nó lấy tọa độ x và y từ <code>cornerPositions</code> dựa trên chỉ số trong <code>squarePositions</code>.</li>
+                    <li>Sau đó, nó cập nhật thuộc tính <code>style.left</code> và <code>style.top</code> của hình vuông để di chuyển nó đến vị trí mới.</li>
+                </ul>
                 <pre><code>
 const moveSquaresAwayFromCursor = (cursorX, cursorY) => {
     const availableCorners = [0, 1, 2, 3].filter(corner => !squarePositions.includes(corner));
@@ -346,15 +372,26 @@ const moveSquaresAwayFromCursor = (cursorX, cursorY) => {
     }
 };
                 </code></pre>
-                <p><b>moveSquaresAwayFromCursor</b>: Hàm này xử lý việc di chuyển các hình vuông khi con trỏ chuột đến gần chúng.</p>
-                <ul>
-                    <li><b>availableCorners</b>: Lọc ra những vị trí góc còn trống (chưa có hình vuông nào).</li>
-                    <li><b>approachingSquareIndex</b>: Tìm chỉ số của hình vuông gần nhất với con trỏ chuột (nếu khoảng cách giữa hình vuông và con trỏ nhỏ hơn 120px).</li>
-                    <li><b>Math.hypot</b>: Hàm tính toán khoảng cách giữa con trỏ chuột và tâm của hình vuông.</li>
-                    <li>Nếu một hình vuông đang gần con trỏ chuột, nó sẽ di chuyển hình vuông này đến góc trống và cập nhật vị trí của các hình vuông.</li>
-                </ul>
-
-                <h4>7. Sự kiện di chuyển chuột (mousemove)</h4>
+                <p>Hàm <code>moveSquaresAwayFromCursor</code> thực hiện các bước sau:</p>
+                <ol>
+                    <li>Xác định các góc còn trống bằng cách lọc ra các góc không có trong <code>squarePositions</code>.</li>
+                    <li>Nếu không có góc trống, hàm kết thúc.</li>
+                    <li>Tìm hình vuông gần con trỏ nhất bằng cách:
+                        <ul>
+                            <li>Lặp qua các vị trí trong <code>squarePositions</code>.</li>
+                            <li>Tính khoảng cách từ tâm của mỗi hình vuông đến con trỏ sử dụng công thức Pythagoras (<code>Math.hypot</code>).</li>
+                            <li>Kiểm tra xem khoảng cách có nhỏ hơn 120px không.</li>
+                        </ul>
+                    </li>
+                    <li>Nếu tìm thấy hình vuông gần (khoảng cách < 120px):
+                        <ul>
+                            <li>Chọn một góc trống ngẫu nhiên.</li>
+                            <li>Tìm một hình vuông khác để hoán đổi vị trí.</li>
+                            <li>Cập nhật <code>squarePositions</code> để phản ánh sự thay đổi vị trí.</li>
+                            <li>Gọi <code>updateSquarePositions()</code> để cập nhật vị trí trên màn hình.</li>
+                        </ul>
+                    </li>
+                </ol>
                 <pre><code>
 container.addEventListener('mousemove', (e) => {
     const { left, top } = container.getBoundingClientRect();
@@ -363,138 +400,31 @@ container.addEventListener('mousemove', (e) => {
     cursor.style.top = `${y - 10}px`;
     moveSquaresAwayFromCursor(x, y);
 });
-                </code></pre>
-                <p>Khi con trỏ chuột di chuyển trong vùng chứa (<code>container</code>):</p>
-                <ul>
-                    <li>Lấy tọa độ chuột tương đối so với khung chứa.</li>
-                    <li>Cập nhật vị trí của con trỏ hiển thị (<code>cursor</code>).</li>
-                    <li>Gọi hàm <code>moveSquaresAwayFromCursor</code> để di chuyển các hình vuông nếu cần.</li>
-                </ul>
 
-                <h4>8. Sự kiện khi chuột rời khỏi hoặc đi vào vùng chứa</h4>
-                <pre><code>
 container.addEventListener('mouseleave', () => cursor.style.display = 'none');
 container.addEventListener('mouseenter', () => cursor.style.display = 'block');
-                </code></pre>
-                <p><b>mouseleave</b>: Ẩn con trỏ khi chuột rời khỏi khung chứa.</p>
-                <p><b>mouseenter</b>: Hiển thị lại con trỏ khi chuột quay trở lại.</p>
 
-                <h4>9. Cập nhật vị trí ban đầu của các hình vuông</h4>
-                 <pre><code>
 updateSquarePositions();
                 </code></pre>
-                <p>Cuối cùng, khi trang được tải, hàm <code>updateSquarePositions</code> được gọi để thiết lập vị trí ban đầu của các hình vuông.</p>
-			</div>
-
-		</div>
+                <p>Cuối cùng, chúng ta thêm các event listener:</p>
+                <ul>
+                    <li><code>mousemove</code>: 
+                        <ul>
+                            <li>Tính toán vị trí của con trỏ trong container bằng cách trừ vị trí của container khỏi vị trí của chuột.</li>
+                            <li>Cập nhật vị trí của phần tử <code>cursor</code> để theo dõi con trỏ (trừ 10px để căn giữa).</li>
+                            <li>Gọi <code>moveSquaresAwayFromCursor</code> với vị trí mới của con trỏ.</li>
+                        </ul>
+                    </li>
+                    <li><code>mouseleave</code>: Ẩn phần tử <code>cursor</code> khi chuột rời khỏi container.</li>
+                    <li><code>mouseenter</code>: Hiện phần tử <code>cursor</code> khi chuột vào container.</li>
+                </ul>
+                <p>Hàm <code>updateSquarePositions()</code> được gọi ở cuối để khởi tạo vị trí ban đầu của các hình vuông khi trang web được tải.</p>
+                <p>Tổng thể, mã này tạo ra một hiệu ứng tương tác thú vị, nơi các hình vuông "né tránh" con trỏ chuột, tạo cảm giác chúng có ý thức và phản ứng với người dùng.</p>
+            </div>
+        </div>
     </div>
 
-    <script>
-        function goDark() {
-            var element = document.body;
-            element.classList.toggle("dark-mode");
-        } 
-        function changeText() {
-            document.getElementById("demo").innerHTML = "Nội dung đã được thay đổi!";
-        }
-
-        function toggleLight() {
-          const bulb = document.getElementById("bulb");
-          bulb.classList.toggle("on");
-        }
-
-        function addNumbers() {
-            var num1 = parseFloat(document.getElementById("num1").value);
-            var num2 = parseFloat(document.getElementById("num2").value);
-            var sum = num1 + num2;
-            document.getElementById("result").innerHTML = "Kết quả: " + sum;
-        }
-
-        function updateClock() {
-            var date = new Date();
-            var h = date.getHours(); // 0 - 23
-            var m = date.getMinutes(); // 0 - 59
-            var s = date.getSeconds(); // 0 - 59
-            var session = "AM";
-            
-            if(h == 0){
-                h = 12;
-            }
-            
-            if(h > 12){
-                h = h - 12;
-                session = "PM";
-            }
-            
-            h = (h < 10) ? "0" + h : h;
-            m = (m < 10) ? "0" + m : m;
-            s = (s < 10) ? "0" + s : s;
-            
-            var time = h + ":" + m + ":" + s + " " + session;
-            document.getElementById("clock").innerText = time;
-            document.getElementById("clock").textContent = time;
-            
-            setTimeout(updateClock, 1000);
-        }
-
-        updateClock();
-    </script>
-	
-	<script>
-        const container = document.getElementById('container');
-        const squares = document.querySelectorAll('.square');
-        const cursor = document.getElementById('cursor');
-    
-        const margin = 25, containerSize = 500, squareSize = 150;
-        const cornerPositions = [
-            { x: margin, y: margin },
-            { x: containerSize - squareSize - margin, y: margin },
-            { x: margin, y: containerSize - squareSize - margin },
-            { x: containerSize - squareSize - margin, y: containerSize - squareSize - margin }
-        ];
-    
-        let squarePositions = [0, 1, 2];
-    
-        const updateSquarePositions = () => {
-            squares.forEach((square, index) => {
-                const { x, y } = cornerPositions[squarePositions[index]];
-                square.style.left = `${x}px`;
-                square.style.top = `${y}px`;
-            });
-        };
-    
-        const moveSquaresAwayFromCursor = (cursorX, cursorY) => {
-            const availableCorners = [0, 1, 2, 3].filter(corner => !squarePositions.includes(corner));
-            if (availableCorners.length === 0) return;
-    
-            const approachingSquareIndex = squarePositions.findIndex((pos) => {
-                const { x, y } = cornerPositions[pos];
-                const distance = Math.hypot(cursorX - (x + squareSize / 2), cursorY - (y + squareSize / 2));
-                return distance < 120;
-            });
-    
-            if (approachingSquareIndex !== -1) {
-                const [emptyCorner] = availableCorners;
-                const swapIndex = squarePositions.find((_, idx) => idx !== approachingSquareIndex);
-                squarePositions[squarePositions.indexOf(swapIndex)] = emptyCorner;
-                squarePositions[approachingSquareIndex] = swapIndex;
-                updateSquarePositions();
-            }
-        };
-    
-        container.addEventListener('mousemove', (e) => {
-            const { left, top } = container.getBoundingClientRect();
-            const x = e.clientX - left, y = e.clientY - top;
-            cursor.style.left = `${x - 10}px`;
-            cursor.style.top = `${y - 10}px`;
-            moveSquaresAwayFromCursor(x, y);
-        });
-    
-        container.addEventListener('mouseleave', () => cursor.style.display = 'none');
-        container.addEventListener('mouseenter', () => cursor.style.display = 'block');
-    
-        updateSquarePositions();
-    </script>
-    
+    <script src="app.js"></script>
+    <script src="squares-transtioning.js"></script>
 </body>
 </html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Larger Corner-Switching Rounded Squares with Margin</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        #container {
+            width: 500px;
+            height: 500px;
+            background-color: #ddd;
+            position: relative;
+            cursor: none;
+            border-radius: 25px;
+        }
+        .square {
+            width: 200px;
+            height: 200px;
+            background-color: #3498db;
+            position: absolute;
+            transition: all 0.1s ease;
+            border-radius: 40px;
+        }
+        #cursor {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(231, 76, 60, 0.7);
+            position: absolute;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="square" id="square1"></div>
+        <div class="square" id="square2"></div>
+        <div class="square" id="square3"></div>
+        <div id="cursor"></div>
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+        const squares = document.querySelectorAll('.square');
+        const cursor = document.getElementById('cursor');
+
+        const margin = 25; // Margin from the edges of the container
+        const cornerPositions = [
+            { x: margin, y: margin },
+            { x: 500 - 200 - margin, y: margin },
+            { x: margin, y: 500 - 200 - margin },
+            { x: 500 - 200 - margin, y: 500 - 200 - margin }
+        ];
+
+        let squarePositions = [0, 1, 2];
+
+        function updateSquarePositions() {
+            squares.forEach((square, index) => {
+                const position = cornerPositions[squarePositions[index]];
+                square.style.left = `${position.x}px`;
+                square.style.top = `${position.y}px`;
+            });
+        }
+
+        updateSquarePositions();
+
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Move custom cursor
+            cursor.style.left = `${x - 10}px`;
+            cursor.style.top = `${y - 10}px`;
+
+            squares.forEach((square, index) => {
+                const position = cornerPositions[squarePositions[index]];
+                const sqX = position.x + 100;
+                const sqY = position.y + 100;
+
+                const dx = x - sqX;
+                const dy = y - sqY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 120) {
+                    let availableCorners = [0, 1, 2, 3].filter(corner => !squarePositions.includes(corner));
+                    let newPosition = availableCorners[Math.floor(Math.random() * availableCorners.length)];
+                    
+                    squarePositions[index] = newPosition;
+                    updateSquarePositions();
+                }
+            });
+        });
+
+        container.addEventListener('mouseleave', () => {
+            cursor.style.display = 'none';
+        });
+
+        container.addEventListener('mouseenter', () => {
+            cursor.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
