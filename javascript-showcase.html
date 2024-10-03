@@ -480,6 +480,7 @@ function addNumbers() {
                     <ol>
                         <li>Lấy giá trị của các hệ số a, b, c từ input người dùng.</li>
                         <li>Kiểm tra tính hợp lệ của input.</li>
+                        <li>Xử lý các trường hợp đặc biệt (a = 0, phương trình bậc nhất).</li>
                         <li>Tính delta (discriminant) của phương trình: Δ = b² - 4ac.</li>
                         <li>Dựa vào giá trị của delta, xác định loại nghiệm và tính toán.</li>
                         <li>Hiển thị kết quả cho người dùng.</li>
@@ -497,7 +498,17 @@ function solveQuadraticEquation() {
     }
 
     if (a === 0) {
-        resultElement.innerHTML = "Đây không phải là phương trình bậc hai (a phải khác 0).";
+        if (b === 0) {
+            if (c === 0) {
+                resultElement.innerHTML = "Phương trình vô số nghiệm.";
+            } else {
+                resultElement.innerHTML = "Phương trình vô nghiệm.";
+            }
+        } else {
+            // Giải phương trình bậc 1: bx + c = 0
+            const x = -c / b;
+            resultElement.innerHTML = `Đây là phương trình bậc nhất. Nghiệm là: x = ${x.toFixed(2)}`;
+        }
         return;
     }
 
@@ -506,20 +517,42 @@ function solveQuadraticEquation() {
     if (discriminant > 0) {
         const x1 = (-b + Math.sqrt(discriminant)) / (2*a);
         const x2 = (-b - Math.sqrt(discriminant)) / (2*a);
-        resultElement.innerHTML = `Phương trình có hai nghiệm phân biệt:<br>x₁ = ${x1.toFixed(2)}<br>x₂ = ${x2.toFixed(2)}`;
+        resultElement.innerHTML = `Phương trình có hai nghiệm phân biệt:
+            x₁ = ${x1.toFixed(2)}
+            x₂ = ${x2.toFixed(2)}`;
     } else if (discriminant === 0) {
         const x = -b / (2*a);
-        resultElement.innerHTML = `Phương trình có nghiệm kép:<br>x = ${x.toFixed(2)}`;
+        resultElement.innerHTML = `Phương trình có nghiệm kép:
+            x = ${x.toFixed(2)}`;
     } else {
         const realPart = -b / (2*a);
         const imaginaryPart = Math.sqrt(-discriminant) / (2*a);
-        resultElement.innerHTML = `Phương trình có hai nghiệm phức:<br>
-            x₁ = ${realPart.toFixed(2)} + ${imaginaryPart.toFixed(2)}i<br>
+        resultElement.innerHTML = `Phương trình có hai nghiệm phức:
+            x₁ = ${realPart.toFixed(2)} + ${imaginaryPart.toFixed(2)}i
             x₂ = ${realPart.toFixed(2)} - ${imaginaryPart.toFixed(2)}i`;
     }
 }
                     </code></pre>
-                    <p>Ví dụ này minh họa cách JavaScript có thể được sử dụng để thực hiện các phép tính phức tạp và áp dụng kiến thức toán học vào lập trình.</p>
+                    <p>Giải thích chi tiết:</p>
+                    <ul>
+                        <li>Đầu tiên, hàm kiểm tra xem input có hợp lệ không bằng cách sử dụng <code>isNaN()</code>.</li>
+                        <li>Nếu a = 0, hàm xử lý các trường hợp đặc biệt:
+                            <ul>
+                                <li>Nếu b = 0 và c = 0: Phương trình vô số nghiệm.</li>
+                                <li>Nếu b = 0 và c ≠ 0: Phương trình vô nghiệm.</li>
+                                <li>Nếu b ≠ 0: Giải phương trình bậc nhất bx + c = 0.</li>
+                            </ul>
+                        </li>
+                        <li>Nếu a ≠ 0, hàm tính delta và xử lý ba trường hợp:
+                            <ul>
+                                <li>Delta > 0: Hai nghiệm phân biệt.</li>
+                                <li>Delta = 0: Nghiệm kép.</li>
+                                <li>Delta < 0: Hai nghiệm phức.</li>
+                            </ul>
+                        </li>
+                        <li>Kết quả được làm tròn đến 2 chữ số thập phân bằng <code>toFixed(2)</code>.</li>
+                    </ul>
+                    <p>Ví dụ này minh họa cách JavaScript có thể được sử dụng để thực hiện các phép tính phức tạp, xử lý nhiều trường hợp khác nhau, và áp dụng kiến thức toán học vào lập trình.</p>
                 </div>
             </div>
         </div>
@@ -589,10 +622,10 @@ updateClock();
             <div class="demo">
                 <h2>5. Các hình tròn di chuyển theo vị trí con trỏ</h2>
                 <p>Di chuyển chuột vào vùng dưới đây để xem hiệu ứng các hình tròn di chuyển theo vị trí con trỏ.</p>
-                <div id="container" style="width: 500px; height: 500px; background-color: #ddd; position: relative; border-radius: 25px;">
-                    <div class="square" id="square1" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
-                    <div class="square" id="square2" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
-                    <div class="square" id="square3" style="width: 150px; height: 150px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
+                <div id="container" style="width: 400px; height:400px; background-color: #ddd; position: relative; border-radius: 25px;">
+                    <div class="square" id="square1" style="width: 125px; height: 125px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
+                    <div class="square" id="square2" style="width: 125px; height: 125px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
+                    <div class="square" id="square3" style="width: 125px; height: 125px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
                     <div id="cursor" style="width: 20px; height: 20px; border-radius: 50%; background-color: rgba(231, 76, 60, 0.7); position: absolute; pointer-events: none;"></div>
                 </div>
             </div>
@@ -721,5 +754,6 @@ updateSquarePositions();
     <script src="app.js"></script>
     <script src="squares-transtioning.js"></script>
     <script src="tabs.js"></script>
+    <script src="equation-solver.js"></script>
 </body>
 </html>
