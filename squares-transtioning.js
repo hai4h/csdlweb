@@ -2,7 +2,7 @@ const container = document.getElementById('container');
 const squares = document.querySelectorAll('.square');
 const cursor = document.getElementById('cursor');
 
-const margin = 25, containerSize = 500, squareSize = 150;
+const margin = 25, containerSize = 400, squareSize = 125;
 const cornerPositions = [
     { x: margin, y: margin },
     { x: containerSize - squareSize - margin, y: margin },

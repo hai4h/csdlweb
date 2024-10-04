@@ -14,7 +14,7 @@
             padding: 20px;
             background-color: #f4f4f4;
             transition: background-color 0.3s, color 0.3s;
-            font-size: 18px;
+            font-size: 15px;
         }
         .container {
             max-width: 78%;
@@ -23,9 +23,6 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1, h2 {
-            color: #333;
         }
         .example {
             display: flex;
@@ -37,7 +34,8 @@
         .demo {
             flex: 1;
             text-align: center;
-            max-width: 40%;
+            max-width: 45%;
+            padding-right: 10px;
         }
         .demo>#clock{
             margin-top: 100px;
@@ -76,6 +74,9 @@
             padding: 10px;
             overflow-x: auto;
         }
+        code {
+            color: #007117;
+        }
         #clock {
             font-size: 20px;
             font-family: Orbitron;
@@ -100,7 +101,6 @@
         }
         .dark-mode .dark-mode-btn {
             background-color: #f0f0f0;
-            border: 2px solid #333;
             color: #333;
             box-shadow: 0 0 80px white;
         }
@@ -110,6 +110,9 @@
         }
         .dark-mode {
             background-color: #151515;
+            color: #e0e0e0;
+        }
+        .dark-mode >h2{
             color: #e0e0e0;
         }
         .dark-mode .container {
@@ -197,7 +200,6 @@
             outline: none;
             cursor: pointer;
             padding: 14px 16px;
-            transition: 0.3s;
             border-radius: 10px;
         }
 
@@ -228,13 +230,14 @@
         } 
         .sub-example {
             margin-top: 30px;
-            padding: 20px;
-            max-width: 45%;
+            padding: 10px;
+            max-width: 50%;
         }
 
         .sub-example h3 {
             margin-top: 0;
         }
+
 
         /* Custom styles for Prism */
         pre[class*="language-"] {
@@ -315,6 +318,10 @@
         .dark-mode .token {
             text-shadow: none !important;
         }
+
+        .token.operator {
+            background-color: #f5f2f0;
+        }
     </style>
 </head>
 <body>
@@ -339,10 +346,40 @@
         <div class="example" id="exp1">
             <div class="demo">
                 <h2>1. Thay đổi nội dung</h2>
-                <p id="demo">Nhấn nút để thay đổi nội dung này.</p>
-                <button onclick="changeText()">Thay đổi/Khôi phục nội dung</button>
+                <p id="demo" style="text-align: center;">Nhấn nút để thay đổi nội dung này.</p>
+                <div style="text-align: center;">
+                    <button onclick="changeText()">Thay đổi/Khôi phục nội dung</button>
+                </div>
                 <hr style="opacity: 0">
-                
+                <p style="text-align: left;">Giải thích chi tiết:</p>
+                <ol style="text-align: left; padding-right: 20px;">
+                    <li>Chúng ta sử dụng hai biến toàn cục:
+                        <ul>
+                            <li><code>originalText</code>: để lưu trữ nội dung ban đầu của phần tử.</li>
+                            <li><code>isChanged</code>: để theo dõi trạng thái hiện tại của nội dung (đã thay đổi hay chưa).</li>
+                        </ul>
+                    </li>
+                    <li>Hàm <code>changeText()</code> thực hiện các bước sau:
+                        <ul>
+                            <li>Tìm phần tử có id "demo" bằng <code>document.getElementById()</code>.</li>
+                            <li>Kiểm tra xem phần tử có tồn tại không. Nếu không, hiển thị lỗi và kết thúc hàm.</li>
+                            <li>Nếu nội dung chưa được thay đổi (<code>!isChanged</code>):
+                                <ul>
+                                    <li>Lưu nội dung hiện tại vào <code>originalText</code>.</li>
+                                    <li>Thay đổi nội dung thành "Nội dung đã được thay đổi!".</li>
+                                    <li>Đặt <code>isChanged</code> thành <code>true</code>.</li>
+                                </ul>
+                            </li>
+                            <li>Nếu nội dung đã được thay đổi:
+                                <ul>
+                                    <li>Khôi phục nội dung ban đầu từ <code>originalText</code>.</li>
+                                    <li>Đặt <code>isChanged</code> thành <code>false</code>.</li>
+                                </ul>
+                            </li>
+                            <li>Ghi log nội dung hiện tại ra console để dễ dàng theo dõi.</li>
+                        </ul>
+                    </li>
+                </ol>
             </div>
             <div class="explanation">
                 <h3>Giải thích</h3>
@@ -372,36 +409,7 @@ function changeText() {
     console.log("Nội dung hiện tại:", demoElement.innerHTML)
 }
                 </code></pre>
-                <p>Giải thích chi tiết:</p>
-                <ol>
-                    <li>Chúng ta sử dụng hai biến toàn cục:
-                        <ul>
-                            <li><code>originalText</code>: để lưu trữ nội dung ban đầu của phần tử.</li>
-                            <li><code>isChanged</code>: để theo dõi trạng thái hiện tại của nội dung (đã thay đổi hay chưa).</li>
-                        </ul>
-                    </li>
-                    <li>Hàm <code>changeText()</code> thực hiện các bước sau:
-                        <ul>
-                            <li>Tìm phần tử có id "demo" bằng <code>document.getElementById()</code>.</li>
-                            <li>Kiểm tra xem phần tử có tồn tại không. Nếu không, hiển thị lỗi và kết thúc hàm.</li>
-                            <li>Nếu nội dung chưa được thay đổi (<code>!isChanged</code>):
-                                <ul>
-                                    <li>Lưu nội dung hiện tại vào <code>originalText</code>.</li>
-                                    <li>Thay đổi nội dung thành "Nội dung đã được thay đổi!".</li>
-                                    <li>Đặt <code>isChanged</code> thành <code>true</code>.</li>
-                                </ul>
-                            </li>
-                            <li>Nếu nội dung đã được thay đổi:
-                                <ul>
-                                    <li>Khôi phục nội dung ban đầu từ <code>originalText</code>.</li>
-                                    <li>Đặt <code>isChanged</code> thành <code>false</code>.</li>
-                                </ul>
-                            </li>
-                            <li>Ghi log nội dung hiện tại ra console để dễ dàng theo dõi.</li>
-                        </ul>
-                    </li>
-                </ol>
-                <p>Cách tiếp cận này cho phép người dùng chuyển đổi giữa nội dung ban đầu và nội dung đã thay đổi bằng cách nhấn nút nhiều lần. Nó cũng bao gồm xử lý lỗi cơ bản và logging để giúp gỡ lỗi.</p>
+                
             </div>
         </div>
 
@@ -428,17 +436,18 @@ function toggleLight() {
         </div>
 
         <div class="example" id="exp3">
-            <div class="demo">
+            <div style="text-align: center; position: absolute;">
                 <h2>3. Tính toán số học</h2>
                 <br>
             </div>
             
             <div class="sub-example">
                 <h3 style="text-align: center;">Cộng hai số</h3>
-                <input type="number" id="num1" placeholder="Số thứ nhất" style="margin-left: 10px;">
-                <input type="number" id="num2" placeholder="Số thứ hai" style="margin-left: 10px;">
+                <p>Nhập hai số để cộng:</p>
+                <input type="number" id="num1" placeholder="Số thứ nhất" style="margin-left: 10%;">
+                <input type="number" id="num2" placeholder="Số thứ hai" style="margin-left: 10%;">
                 <button onclick="addNumbers()" style="margin-left: 50px;">Cộng</button>
-                <p id="result" style="margin-left: 10px;"></p>
+                <p id="result" style="margin-left: 10%;"></p>
                 
                 <div class="explanation">
                     <h4>Giải thích</h4>
@@ -467,10 +476,11 @@ function addNumbers() {
             <div class="sub-example">
                 <h3 style="text-align: center;">Giải phương trình bậc hai</h3>
                 <p>Nhập các hệ số của phương trình ax² + bx + c = 0</p>
-                <input type="number" id="coef-a" placeholder="a">
-                <input type="number" id="coef-b" placeholder="b">
-                <input type="number" id="coef-c" placeholder="c">
-                <button onclick="solveQuadraticEquation()">Giải</button>
+                <input type="number" id="coef-a" placeholder="a" style="margin-left: auto; margin-right: auto; margin-left: 6%;">
+                <input type="number" id="coef-b" placeholder="b" style="margin-left: auto; margin-right: auto; margin-left: 5%;">
+                <input type="number" id="coef-c" placeholder="c" style="margin-left: auto; margin-right: auto; margin-left: 5%;">
+                <br>
+                <button onclick="solveQuadraticEquation()" style="margin-top: 10px; display: block; margin-left: auto; margin-right: auto;">Nhấn để giải phương trình</button>
                 <p id="equation-result"></p>
                 
                 <div class="explanation">
@@ -561,11 +571,44 @@ function solveQuadraticEquation() {
             <div class="demo">
                 <h2>4. Đồng hồ thời gian thực</h2>
                 <p id="clock"></p>
+                <div id="analog-clock" style="position: relative; width: 200px; height: 200px; margin: auto; transform: rotate(90deg);">
+                    <div id="hour-hand" style="position: absolute; width: 50%; height: 3px; background: black; top: 50%; transform-origin: 100%; border-radius: 20%;"></div>
+                    <div id="minute-hand" style="position: absolute; width: 50%; height: 2px; background: black; top: 50%; transform-origin: 100%;"></div>
+                    <div id="second-hand" style="position: absolute; width: 50%; height: 1px; background: red; top: 50%; transform-origin: 100%;"></div>
+                </div>
+                <div class="explanation" style="text-align: left; margin-top: 50px;">
+                    <ol style="text-align: left;">
+                        <li><code>var date = new Date();</code>: Tạo một đối tượng Date mới, đại diện cho thời gian hiện tại.</li>
+                        <li><code>var h = date.getHours();</code>: Lấy giờ hiện tại (0-23).</li>
+                        <li><code>var m = date.getMinutes();</code>: Lấy phút hiện tại (0-59).</li>
+                        <li><code>var s = date.getSeconds();</code>: Lấy giây hiện tại (0-59).</li>
+                        <li><code>var session = "AM";</code>: Mặc định là buổi sáng (AM).</li>
+                        <li>Điều chỉnh giờ:
+                            <ul>
+                                <li>Nếu giờ là 0, đặt lại thành 12 (12 AM).</li>
+                                <li>Nếu giờ lớn hơn 12, trừ đi 12 và đổi session thành "PM".</li>
+                            </ul>
+                        </li>
+                        <li>Thêm số 0 đứng trước nếu giờ, phút hoặc giây nhỏ hơn 10.</li>
+                        <li>Tạo chuỗi thời gian dạng "HH:MM:SS AM/PM".</li>
+                        <li>Cập nhật nội dung của phần tử có id "clock" bằng chuỗi thời gian.</li>
+                        <li>**Analog Clock Hands**:
+                            <ul>
+                                <li><code>hourDeg</code>: Tính toán góc quay của kim giờ, bao gồm cả ảnh hưởng của phút (30 độ mỗi giờ và 0.5 độ mỗi phút).</li>
+                                <li><code>minuteDeg</code>: Tính toán góc quay của kim phút (6 độ mỗi phút).</li>
+                                <li><code>secondDeg</code>: Tính toán góc quay của kim giây (6 độ mỗi giây).</li>
+                                <li>Áp dụng các góc quay cho các kim đồng hồ bằng CSS <code>transform: rotate()</code>.</li>
+                            </ul>
+                        </li>
+                        <li><code>setTimeout(updateClock, 1000);</code>: Đặt hẹn giờ để gọi lại hàm <code>updateClock()</code> sau 1 giây (1000 ms).</li>
+                    </ol>
+                    <p>Hàm <code>updateClock()</code> được gọi lần đầu tiên để khởi động đồng hồ. Sau đó, nó tự gọi lại mỗi giây thông qua <code>setTimeout()</code>, tạo ra một vòng lặp liên tục cập nhật thời gian và vị trí của các kim đồng hồ.</p>
+                </div>
             </div>
             <div class="explanation">
                 <p><strong>Ứng dụng:</strong> <em>Bộ hẹn giờ và đối tượng Date</em></p>
                 <h3>Giải thích</h3>
-                <p>Ví dụ này hiển thị một đồng hồ thời gian thực, được cập nhật liên tục bằng JavaScript. Hãy phân tích chi tiết từng phần của mã:</p>
+                <p>Ví dụ này hiển thị một đồng hồ thời gian thực, được cập nhật liên tục bằng JavaScript. Nó bao gồm cả đồng hồ kỹ thuật số và đồng hồ analog với kim đồng hồ di chuyển.</p>
                 <pre><code class="language-javascript">
 function updateClock() {
     var date = new Date();
@@ -591,30 +634,26 @@ function updateClock() {
     document.getElementById("clock").innerText = time;
     document.getElementById("clock").textContent = time;
     
+    // Lấy các phần tử kim đồng hồ
+    const hourHand = document.getElementById("hour-hand");
+    const minuteHand = document.getElementById("minute-hand");
+    const secondHand = document.getElementById("second-hand");
+
+    // Tính toán góc quay của các kim đồng hồ
+    const hourDeg = h * 30 + m * 0.5;
+    const minuteDeg = m * 6;
+    const secondDeg = s * 6;
+
+    // Cập nhật vị trí của các kim đồng hồ
+    hourHand.style.transform = `rotate(${hourDeg}deg)`;
+    minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+    secondHand.style.transform = `rotate(${secondDeg}deg)`;
+
     setTimeout(updateClock, 1000);
 }
 
 updateClock();
                 </code></pre>
-                <p>Giải thích chi tiết:</p>
-                <ol>
-                    <li><code>var date = new Date();</code>: Tạo một đối tượng Date mới, đại diện cho thời gian hiện tại.</li>
-                    <li><code>var h = date.getHours();</code>: Lấy giờ hiện tại (0-23).</li>
-                    <li><code>var m = date.getMinutes();</code>: Lấy phút hiện tại (0-59).</li>
-                    <li><code>var s = date.getSeconds();</code>: Lấy giây hiện tại (0-59).</li>
-                    <li><code>var session = "AM";</code>: Mặc định là buổi sáng (AM).</li>
-                    <li>Điều chỉnh giờ:
-                        <ul>
-                            <li>Nếu giờ là 0, đặt lại thành 12 (12 AM).</li>
-                            <li>Nếu giờ lớn hơn 12, trừ đi 12 và đổi session thành "PM".</li>
-                        </ul>
-                    </li>
-                    <li>Thêm số 0 đứng trước nếu giờ, phút hoặc giây nhỏ hơn 10.</li>
-                    <li>Tạo chuỗi thời gian dạng "HH:MM:SS AM/PM".</li>
-                    <li>Cập nhật nội dung của phần tử có id "clock" bằng chuỗi thời gian.</li>
-                    <li><code>setTimeout(updateClock, 1000);</code>: Đặt hẹn giờ để gọi lại hàm <code>updateClock()</code> sau 1 giây (1000 ms).</li>
-                </ol>
-                <p>Hàm <code>updateClock()</code> được gọi lần đầu tiên để khởi động đồng hồ. Sau đó, nó tự gọi lại mỗi giây thông qua <code>setTimeout()</code>, tạo ra một vòng lặp liên tục cập nhật thời gian.</p>
             </div>
         </div>
 
@@ -627,6 +666,49 @@ updateClock();
                     <div class="square" id="square2" style="width: 125px; height: 125px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
                     <div class="square" id="square3" style="width: 125px; height: 125px; background-color: #3498db; position: absolute; transition: all 0.5s ease; border-radius: 40%;"></div>
                     <div id="cursor" style="width: 20px; height: 20px; border-radius: 50%; background-color: rgba(231, 76, 60, 0.7); position: absolute; pointer-events: none;"></div>
+                </div>
+                <pre style="text-align: left; margin-top: 100px;"><code class="language-javascript">
+const updateSquarePositions = () => {
+    squares.forEach((square, index) => {
+        const { x, y } = cornerPositions[squarePositions[index]];
+        square.style.left = `${x}px`;
+        square.style.top = `${y}px`;
+    });
+};
+
+const moveSquaresAwayFromCursor = (cursorX, cursorY) => {
+    const availableCorners = [0, 1, 2, 3].filter(corner => !squarePositions.includes(corner));
+    if (availableCorners.length === 0) return;
+
+    const approachingSquareIndex = squarePositions.findIndex((pos) => {
+        const { x, y } = cornerPositions[pos];
+        const distance = Math.hypot(cursorX - (x + squareSize / 2), cursorY - (y + squareSize / 2));
+        return distance < 120;
+    });
+
+    if (approachingSquareIndex !== -1) {
+        const [emptyCorner] = availableCorners;
+        const swapIndex = squarePositions.find((_, idx) => idx !== approachingSquareIndex);
+        squarePositions[squarePositions.indexOf(swapIndex)] = emptyCorner;
+        squarePositions[approachingSquareIndex] = swapIndex;
+        updateSquarePositions();
+    }
+};
+                </code></pre>
+                <div class="explanation" style="text-align: left; margin-top: 50px;">
+                    <p>Cuối cùng, chúng ta thêm các event listener:</p>
+                <ul>
+                    <li><code>mousemove</code>: 
+                        <ul>
+                            <li>Tính toán vị trí của con trỏ trong container bằng cách trừ vị trí của container khỏi vị trí của chuột.</li>
+                            <li>Cập nhật vị trí của phần tử <code>cursor</code> để theo dõi con trỏ (trừ 10px để căn giữa).</li>
+                            <li>Gọi <code>moveSquaresAwayFromCursor</code> với vị trí mới của con trỏ.</li>
+                        </ul>
+                    </li>
+                    <li><code>mouseleave</code>: Ẩn phần tử <code>cursor</code> khi chuột rời khỏi container.</li>
+                    <li><code>mouseenter</code>: Hiện phần tử <code>cursor</code> khi chuột vào container.</li>
+                </ul>
+                <p>Hàm <code>updateSquarePositions()</code> được gọi ở cuối để khởi tạo vị trí ban đầu của các hình vuông khi trang web được tải.</p>
                 </div>
             </div>
             <div class="explanation">
@@ -655,41 +737,13 @@ let squarePositions = [0, 1, 2];
                     <li><code>cornerPositions</code> là một mảng chứa tọa độ của bốn góc trong container. Mỗi góc được biểu diễn bằng một đối tượng có thuộc tính x và y.</li>
                     <li><code>squarePositions</code> là một mảng theo dõi vị trí hiện tại của ba hình vuông, sử dụng chỉ số của các góc (0, 1, 2 tương ứng với ba góc đầu tiên).</li>
                 </ul>
-                <pre><code class="language-javascript">
-const updateSquarePositions = () => {
-    squares.forEach((square, index) => {
-        const { x, y } = cornerPositions[squarePositions[index]];
-        square.style.left = `${x}px`;
-        square.style.top = `${y}px`;
-    });
-};
-                </code></pre>
+            
                 <p>Hàm <code>updateSquarePositions</code> cập nhật vị trí của các hình vuông trên màn hình:</p>
                 <ul>
                     <li>Nó lặp qua mỗi hình vuông trong <code>squares</code>.</li>
                     <li>Với mỗi hình vuông, nó lấy tọa độ x và y từ <code>cornerPositions</code> dựa trên chỉ số trong <code>squarePositions</code>.</li>
                     <li>Sau đó, nó cập nhật thuộc tính <code>style.left</code> và <code>style.top</code> của hình vuông để di chuyển nó đến vị trí mới.</li>
                 </ul>
-                <pre><code class="language-javascript">
-const moveSquaresAwayFromCursor = (cursorX, cursorY) => {
-    const availableCorners = [0, 1, 2, 3].filter(corner => !squarePositions.includes(corner));
-    if (availableCorners.length === 0) return;
-
-    const approachingSquareIndex = squarePositions.findIndex((pos) => {
-        const { x, y } = cornerPositions[pos];
-        const distance = Math.hypot(cursorX - (x + squareSize / 2), cursorY - (y + squareSize / 2));
-        return distance < 120;
-    });
-
-    if (approachingSquareIndex !== -1) {
-        const [emptyCorner] = availableCorners;
-        const swapIndex = squarePositions.find((_, idx) => idx !== approachingSquareIndex);
-        squarePositions[squarePositions.indexOf(swapIndex)] = emptyCorner;
-        squarePositions[approachingSquareIndex] = swapIndex;
-        updateSquarePositions();
-    }
-};
-                </code></pre>
                 <p>Hàm <code>moveSquaresAwayFromCursor</code> thực hiện các bước sau:</p>
                 <ol>
                     <li>Xác định các góc còn trống bằng cách lọc ra các góc không có trong <code>squarePositions</code>.</li>
@@ -724,19 +778,6 @@ container.addEventListener('mouseenter', () => cursor.style.display = 'block');
 
 updateSquarePositions();
                 </code></pre>
-                <p>Cuối cùng, chúng ta thêm các event listener:</p>
-                <ul>
-                    <li><code>mousemove</code>: 
-                        <ul>
-                            <li>Tính toán vị trí của con trỏ trong container bằng cách trừ vị trí của container khỏi vị trí của chuột.</li>
-                            <li>Cập nhật vị trí của phần tử <code>cursor</code> để theo dõi con trỏ (trừ 10px để căn giữa).</li>
-                            <li>Gọi <code>moveSquaresAwayFromCursor</code> với vị trí mới của con trỏ.</li>
-                        </ul>
-                    </li>
-                    <li><code>mouseleave</code>: Ẩn phần tử <code>cursor</code> khi chuột rời khỏi container.</li>
-                    <li><code>mouseenter</code>: Hiện phần tử <code>cursor</code> khi chuột vào container.</li>
-                </ul>
-                <p>Hàm <code>updateSquarePositions()</code> được gọi ở cuối để khởi tạo vị trí ban đầu của các hình vuông khi trang web được tải.</p>
                 <p>Tổng thể, mã này tạo ra một hiệu ứng tương tác thú vị, nơi các hình vuông "né tránh" con trỏ chuột, tạo cảm giác chúng có ý thức và phản ứng với người dùng.</p>
             </div>
         </div>
@@ -755,5 +796,6 @@ updateSquarePositions();
     <script src="squares-transtioning.js"></script>
     <script src="tabs.js"></script>
     <script src="equation-solver.js"></script>
+    <script src="clock.js"></script>
 </body>
 </html>
