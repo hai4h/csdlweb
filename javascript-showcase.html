@@ -469,6 +469,29 @@ function addNumbers() {
                     </code></pre>
                     <p>Ví dụ này minh họa cách JavaScript xử lý input người dùng và thực hiện phép tính đơn giản.</p>
                 </div>
+                <br>
+                <div class="explanation" style="line-height: 2.5; margin-top: 100px;">
+                    <p>Giải thích chi tiết cho hàm <code>solveQuadraticEquation()</code>:</p>
+                    <ul>
+                        <li>Đầu tiên, hàm kiểm tra xem input có hợp lệ không bằng cách sử dụng <code>isNaN()</code>.</li>
+                        <li>Nếu a = 0, hàm xử lý các trường hợp đặc biệt:
+                            <ul>
+                                <li>Nếu b = 0 và c = 0: Phương trình vô số nghiệm.</li>
+                                <li>Nếu b = 0 và c ≠ 0: Phương trình vô nghiệm.</li>
+                                <li>Nếu b ≠ 0: Giải phương trình bậc nhất bx + c = 0.</li>
+                            </ul>
+                        </li>
+                        <li>Nếu a ≠ 0, hàm tính delta và xử lý ba trường hợp:
+                            <ul>
+                                <li>Delta > 0: Hai nghiệm phân biệt.</li>
+                                <li>Delta = 0: Nghiệm kép.</li>
+                                <li>Delta < 0: Hai nghiệm phức.</li>
+                            </ul>
+                        </li>
+                        <li>Kết quả được làm tròn đến 2 chữ số thập phân bằng <code>toFixed(2)</code>.</li>
+                    </ul>
+                    <p>Ví dụ này minh họa cách JavaScript có thể được sử dụng để thực hiện các phép tính phức tạp, xử lý nhiều trường hợp khác nhau, và áp dụng kiến thức toán học vào lập trình.</p>
+                </div>
             </div>
 
             <hr style="opacity: 0">
@@ -542,27 +565,7 @@ function solveQuadraticEquation() {
             x₂ = ${realPart.toFixed(2)} - ${imaginaryPart.toFixed(2)}i`;
     }
 }
-                    </code></pre>
-                    <p>Giải thích chi tiết:</p>
-                    <ul>
-                        <li>Đầu tiên, hàm kiểm tra xem input có hợp lệ không bằng cách sử dụng <code>isNaN()</code>.</li>
-                        <li>Nếu a = 0, hàm xử lý các trường hợp đặc biệt:
-                            <ul>
-                                <li>Nếu b = 0 và c = 0: Phương trình vô số nghiệm.</li>
-                                <li>Nếu b = 0 và c ≠ 0: Phương trình vô nghiệm.</li>
-                                <li>Nếu b ≠ 0: Giải phương trình bậc nhất bx + c = 0.</li>
-                            </ul>
-                        </li>
-                        <li>Nếu a ≠ 0, hàm tính delta và xử lý ba trường hợp:
-                            <ul>
-                                <li>Delta > 0: Hai nghiệm phân biệt.</li>
-                                <li>Delta = 0: Nghiệm kép.</li>
-                                <li>Delta < 0: Hai nghiệm phức.</li>
-                            </ul>
-                        </li>
-                        <li>Kết quả được làm tròn đến 2 chữ số thập phân bằng <code>toFixed(2)</code>.</li>
-                    </ul>
-                    <p>Ví dụ này minh họa cách JavaScript có thể được sử dụng để thực hiện các phép tính phức tạp, xử lý nhiều trường hợp khác nhau, và áp dụng kiến thức toán học vào lập trình.</p>
+                    </code></pre>                    
                 </div>
             </div>
         </div>
