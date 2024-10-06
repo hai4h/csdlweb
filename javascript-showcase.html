@@ -181,7 +181,6 @@
             background-color: yellow;
             box-shadow: 0 0 50px yellow;
         }
-         /* Style the tab */
         .tab {
             color: #000;
             overflow: hidden;
@@ -191,7 +190,6 @@
             margin: auto;
         }
 
-        /* Style the buttons that are used to open the tab content */
         .tab button {
             color: #000;
             background-color: inherit;
@@ -203,7 +201,6 @@
             border-radius: 10px;
         }
 
-        /* Change background color of buttons on hover */
         .tab button:hover {
             background-color: #a0a0a0;
             border-radius: 10px;
@@ -211,7 +208,6 @@
             margin: auto;
         }
 
-        /* Create an active/current tablink class */
         .tab button.active {
             background-color: #a0a0a0;
             border-radius: 10px;
@@ -219,7 +215,6 @@
             margin: auto;
         }
 
-        /* Style the tab content */
         .tabcontent {
             display: none;
             padding: 6px 12px;
@@ -238,8 +233,6 @@
             margin-top: 0;
         }
 
-
-        /* Custom styles for Prism */
         pre[class*="language-"] {
             background: #f5f2f0;
             margin: 0;
@@ -312,7 +305,6 @@
             color: #a5e075;
         }
 
-        /* Remove any text shadow */
         .dark-mode pre[class*="language-"],
         .dark-mode code[class*="language-"],
         .dark-mode .token {
@@ -444,8 +436,8 @@ function toggleLight() {
             <div class="sub-example">
                 <h3 style="text-align: center;">Cộng hai số</h3>
                 <p>Nhập hai số để cộng:</p>
-                <input type="number" id="num1" placeholder="Số thứ nhất" style="margin-left: 10%;">
-                <input type="number" id="num2" placeholder="Số thứ hai" style="margin-left: 10%;">
+                <input type="number" id="num1" placeholder="Số thứ nhất" style="margin-left: 10%; height: 30px; border-radius: 5px;">
+                <input type="number" id="num2" placeholder="Số thứ hai" style="margin-left: 10%; height: 30px; border-radius: 5px;">
                 <button onclick="addNumbers()" style="margin-left: 50px;">Cộng</button>
                 <p id="result" style="margin-left: 10%;"></p>
                 
@@ -471,7 +463,7 @@ function addNumbers() {
                 </div>
                 <br>
                 <div class="explanation" style="line-height: 2.5; margin-top: 100px;">
-                    <p>Giải thích chi tiết cho hàm <code>solveQuadraticEquation()</code>:</p>
+                    <p>Về hàm <code>solveQuadraticEquation()</code>:</p>
                     <ul>
                         <li>Đầu tiên, hàm kiểm tra xem input có hợp lệ không bằng cách sử dụng <code>isNaN()</code>.</li>
                         <li>Nếu a = 0, hàm xử lý các trường hợp đặc biệt:
@@ -499,9 +491,9 @@ function addNumbers() {
             <div class="sub-example">
                 <h3 style="text-align: center;">Giải phương trình bậc hai</h3>
                 <p>Nhập các hệ số của phương trình ax² + bx + c = 0</p>
-                <input type="number" id="coef-a" placeholder="a" style="margin-left: auto; margin-right: auto; margin-left: 6%;">
-                <input type="number" id="coef-b" placeholder="b" style="margin-left: auto; margin-right: auto; margin-left: 5%;">
-                <input type="number" id="coef-c" placeholder="c" style="margin-left: auto; margin-right: auto; margin-left: 5%;">
+                <input type="number" id="coef-a" placeholder="a" style="margin-left: auto; margin-right: auto; margin-left: 6%; min-height: 30px; border-radius: 5px;">
+                <input type="number" id="coef-b" placeholder="b" style="margin-left: auto; margin-right: auto; margin-left: 5%; min-height: 30px; border-radius: 5px;">
+                <input type="number" id="coef-c" placeholder="c" style="margin-left: auto; margin-right: auto; margin-left: 5%; min-height: 30px; border-radius: 5px;">
                 <br>
                 <button onclick="solveQuadraticEquation()" style="margin-top: 10px; display: block; margin-left: auto; margin-right: auto;">Nhấn để giải phương trình</button>
                 <p id="equation-result"></p>
@@ -579,7 +571,7 @@ function solveQuadraticEquation() {
                     <div id="minute-hand" style="position: absolute; width: 50%; height: 2px; background: black; top: 50%; transform-origin: 100%;"></div>
                     <div id="second-hand" style="position: absolute; width: 50%; height: 1px; background: red; top: 50%; transform-origin: 100%;"></div>
                 </div>
-                <div class="explanation" style="text-align: left; margin-top: 50px;">
+                <div class="explanation" style="text-align: left; margin-top: 50px; line-height: 2;">
                     <ol style="text-align: left;">
                         <li><code>var date = new Date();</code>: Tạo một đối tượng Date mới, đại diện cho thời gian hiện tại.</li>
                         <li><code>var h = date.getHours();</code>: Lấy giờ hiện tại (0-23).</li>

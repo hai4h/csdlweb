@@ -29,7 +29,9 @@ function solveQuadraticEquation() {
     if (discriminant > 0) {
         const x1 = (-b + Math.sqrt(discriminant)) / (2*a);
         const x2 = (-b - Math.sqrt(discriminant)) / (2*a);
-        resultElement.innerHTML = `Phương trình có hai nghiệm phân biệt:x₁ = ${x1.toFixed(2)}x₂ = ${x2.toFixed(2)}`;
+        resultElement.innerHTML = `Phương trình có hai nghiệm phân biệt:
+            x₁ = ${x1.toFixed(2)} 
+            x₂ = ${x2.toFixed(2)}`;
     } else if (discriminant === 0) {
         const x = -b / (2*a);
         resultElement.innerHTML = `Phương trình có nghiệm kép:x = ${x.toFixed(2)}`;
@@ -37,7 +39,7 @@ function solveQuadraticEquation() {
         const realPart = -b / (2*a);
         const imaginaryPart = Math.sqrt(-discriminant) / (2*a);
         resultElement.innerHTML = `Phương trình có hai nghiệm phức:
-            x₁ = ${realPart.toFixed(2)} + ${imaginaryPart.toFixed(2)}i
+            x₁ = ${realPart.toFixed(2)} + ${imaginaryPart.toFixed(2)}i  
             x₂ = ${realPart.toFixed(2)} - ${imaginaryPart.toFixed(2)}i`;
     }
 }

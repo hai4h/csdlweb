@@ -2,6 +2,7 @@ function goDark() {
     var element = document.body;
     element.classList.toggle("dark-mode");
 } 
+
 let originalText = "";
 let isChanged = false;
 
