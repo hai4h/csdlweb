@@ -327,6 +327,7 @@
                 <i class="fas fa-home"></i> Home
             </button>
             <button class="tablinks" onclick="openTab(event, 'exp1')">Thay đổi nội dung</button>
+            <button class="tablinks" onclick="openTab(event, 'exp15')">Tra cứu điểm GPA</button>
             <button class="tablinks" onclick="openTab(event, 'exp2')">Thay đổi thuộc tính</button>
             <button class="tablinks" onclick="openTab(event, 'exp3')">Tính toán số học</button>
             <button class="tablinks" onclick="openTab(event, 'exp4')">Đồng hồ thời gian thực</button>
@@ -334,7 +335,7 @@
         </div>
 
         <hr style="opacity: 0">
-        
+
         <div class="example" id="exp1">
             <div class="demo">
                 <h2>1. Thay đổi nội dung</h2>
@@ -402,6 +403,19 @@ function changeText() {
 }
                 </code></pre>
                 
+            </div>
+        </div>
+        
+        <div class="example" id="exp15">
+            <div class="demo" style="max-width: 100%;">
+                <h2>1.5. Tra cứu điểm GPA</h2>
+                <p id="eval" style="text-align: center;">Nhập mã sinh viên cần tra cứu:</p>
+                <input type="text" id="studentId" placeholder="Mã sinh viên" style="text-align: center;" oninput="this.value = this.value.toUpperCase()">
+                <div style="text-align: center;">
+                    <button onclick="fetchGPA()" style="margin: 20px;">Tra cứu GPA</button>
+                </div>
+                <p id="gpaResult" style="text-align: center;"></p>
+                <hr style="opacity: 0">
             </div>
         </div>
 
@@ -792,5 +806,6 @@ updateSquarePositions();
     <script src="tabs.js"></script>
     <script src="equation-solver.js"></script>
     <script src="clock.js"></script>
+    <script src="gpa.js"></script>
 </body>
 </html>

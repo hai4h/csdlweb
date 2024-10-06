@@ -22,8 +22,6 @@ function changeText() {
         demoElement.innerHTML = originalText;
         isChanged = false;
     }
-    
-    console.log("Nội dung hiện tại:", demoElement.innerHTML);
 }
 
 function toggleLight() {
